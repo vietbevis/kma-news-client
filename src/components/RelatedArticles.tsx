@@ -24,7 +24,7 @@ export default async function RelatedArticles({
             href={`/news/${article.slug}`}
             className="group"
           >
-            <div className="flex items-start hover:bg-gray-50 p-2 rounded-lg transition-colors">
+            <div className="flex gap-2 sm:gap-4 items-start hover:bg-gray-50 p-2 rounded-lg transition-colors">
               <div className="flex-shrink-0 size-16 sm:size-20 overflow-hidden rounded-md mb-3 sm:mb-0 sm:mr-4">
                 <Image
                   image={article.thumbnail}
