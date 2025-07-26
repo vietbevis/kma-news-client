@@ -1,3 +1,4 @@
+import Container from "@/components/Container";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -69,10 +70,10 @@ export default async function StaffPage({
   const staff = data.data[0] as StaffProps;
 
   return (
-    <div className="grid grid-cols-12 gap-8 items-start">
-      <Breadcrumb className="col-span-12">
+    <Container className="py-4 pb-20">
+      <Breadcrumb className="mb-4">
         <BreadcrumbList className="flex-nowrap">
-          <BreadcrumbItem className="text-nowrap">
+          <BreadcrumbItem className="text-nowrap whitespace-nowrap inline-block">
             <BreadcrumbLink asChild>
               <Link href={`/staff`}>{t("staff")}</Link>
             </BreadcrumbLink>
@@ -85,44 +86,49 @@ export default async function StaffPage({
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-      <div className="col-span-12 lg:col-span-4 xl:col-span-3 flex flex-col gap-4 lg:sticky lg:top-16">
-        <div className="aspect-square">
-          <Image image={staff.avatar} className="w-full h-full object-cover" />
-        </div>
-        <div className="flex flex-col gap-2">
-          <h2 className="text-2xl font-bold uppercase text-blue-900">
-            {staff.name}
-          </h2>
-          <div
-            className="prose prose-sm max-w-none"
-            dangerouslySetInnerHTML={{ __html: staff.position }}
-          />
-          <p className="text-sm">
-            <strong>Email:</strong>{" "}
-            <a href={`mailto:${staff.email}`}>{staff.email}</a>
-          </p>
-          <p className="text-sm">
-            <strong>Website:</strong>{" "}
-            <a href={staff.web} target="_blank" rel="noopener noreferrer">
-              {staff.web}
-            </a>
-          </p>
-        </div>
-      </div>
-      <div className="col-span-12 lg:col-span-8 xl:col-span-9 flex flex-col gap-8">
-        {staff.blockDescription.map((item) => (
-          <div key={item.id} className="flex flex-col gap-4">
-            <div className="relative">
-              <h2 className="text-2xl uppercase font-bold">{item.title}</h2>
-              <div className="absolute -bottom-2 w-20 h-1 bg-gradient-to-r from-red-500/60 to-red-500 rounded-full"></div>
-            </div>
-            <div
-              className="prose max-w-none"
-              dangerouslySetInnerHTML={{ __html: item.content }}
+      <div className="grid grid-cols-12 gap-8 items-start">
+        <div className="col-span-12 lg:col-span-4 xl:col-span-3 flex flex-col gap-4 lg:sticky lg:top-16">
+          <div className="aspect-[3/4] overflow-hidden">
+            <Image
+              image={staff.avatar}
+              className="w-full h-full object-cover"
             />
           </div>
-        ))}
+          <div className="flex flex-col gap-2">
+            <h2 className="text-2xl font-bold uppercase text-blue-900">
+              {staff.name}
+            </h2>
+            <div
+              className="prose prose-sm max-w-none"
+              dangerouslySetInnerHTML={{ __html: staff.position }}
+            />
+            <p className="text-sm">
+              <strong>Email:</strong>{" "}
+              <a href={`mailto:${staff.email}`}>{staff.email}</a>
+            </p>
+            <p className="text-sm">
+              <strong>Website:</strong>{" "}
+              <a href={staff.web} target="_blank" rel="noopener noreferrer">
+                {staff.web}
+              </a>
+            </p>
+          </div>
+        </div>
+        <div className="col-span-12 lg:col-span-8 xl:col-span-9 flex flex-col gap-8">
+          {staff.blockDescription.map((item) => (
+            <div key={item.id} className="flex flex-col gap-4">
+              <div className="relative">
+                <h2 className="text-2xl uppercase font-bold">{item.title}</h2>
+                <div className="absolute -bottom-2 w-20 h-1 bg-gradient-to-r from-red-500/60 to-red-500 rounded-full"></div>
+              </div>
+              <div
+                className="prose max-w-none"
+                dangerouslySetInnerHTML={{ __html: item.content }}
+              />
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </Container>
   );
 }

@@ -51,7 +51,7 @@ export const getGlobalSetiings = async (locale: Locale) => {
               fields: ["text", "slug"],
               populate: {
                 navigations: {
-                  fields: ["text", "slug"],
+                  fields: ["text", "slug", "pageType", "singlePageContent"],
                 },
               },
             },
@@ -150,23 +150,44 @@ export const getNavigationBySlug = async (locale: Locale, pageSlug: string) => {
             $eq: pageSlug,
           },
         },
-        fields: ["text", "slug"],
+        fields: ["text", "slug", "pageType", "singlePageContent"],
         populate: {
           navigation: {
-            fields: ["text", "slug"],
+            fields: ["text", "slug", "pageType", "singlePageContent"],
             populate: {
               navigations: {
-                fields: ["text", "slug"],
+                fields: ["text", "slug", "pageType", "singlePageContent"],
               },
             },
           },
           navigations: {
-            fields: ["text", "slug"],
+            fields: ["text", "slug", "pageType", "singlePageContent"],
           },
         },
       },
       next: {
         tags: ["navigation"],
+      },
+    });
+
+    return data.data;
+  } catch (error) {
+    return null;
+  }
+};
+
+export const getAllNavigation = async (locale: Locale) => {
+  try {
+    const data = await api.get(API_ROUTES.NAVIGATION, {
+      params: {
+        locale,
+        fields: ["slug"],
+        pagination: {
+          pageSize: 1000,
+        },
+        next: {
+          tags: ["navigation"],
+        },
       },
     });
 
@@ -182,60 +203,68 @@ export const getListArticleByNavigationId = async (
   page: number = 1,
   pageSize: number = 25
 ) => {
-  const data = await api.get(API_ROUTES.ARTICLE, {
-    params: {
-      locale,
-      filters: {
-        insertToPage: {
-          id: {
-            $eq: navigationId,
+  try {
+    const data = await api.get(API_ROUTES.ARTICLE, {
+      params: {
+        locale,
+        filters: {
+          insertToPage: {
+            id: {
+              $eq: navigationId,
+            },
+          },
+        },
+        fields: [
+          "title",
+          "shortDescription",
+          "slug",
+          "updatedAt",
+          "createdAt",
+          "publishedAt",
+        ],
+        pagination: {
+          page,
+          pageSize,
+        },
+        populate: {
+          insertToPage: {
+            fields: ["text", "slug"],
+          },
+          thumbnail: {
+            fields: ["url", "alternativeText", "width", "height"],
+          },
+          tag: {
+            fields: ["text", "color", "slug"],
           },
         },
       },
-      fields: [
-        "title",
-        "shortDescription",
-        "slug",
-        "updatedAt",
-        "createdAt",
-        "publishedAt",
-      ],
-      pagination: {
-        page,
-        pageSize,
+      next: {
+        tags: ["article"],
       },
-      populate: {
-        insertToPage: {
-          fields: ["text", "slug"],
-        },
-        thumbnail: {
-          fields: ["url", "alternativeText", "width", "height"],
-        },
-        tag: {
-          fields: ["text", "color", "slug"],
-        },
-      },
-    },
-    next: {
-      tags: ["article"],
-    },
-  });
+    });
 
-  return data.data;
+    return data.data;
+  } catch (error) {
+    return null;
+  }
 };
 
 export const getListArticle = async (locale: Locale) => {
-  const data = await api.get(API_ROUTES.ARTICLE, {
-    params: {
-      locale,
-      fields: ["slug"],
-    },
-    next: {
-      tags: ["article"],
-    },
-  });
+  try {
+    const data = await api.get(API_ROUTES.ARTICLE, {
+      params: {
+        locale,
+        fields: ["slug"],
+      },
+      next: {
+        tags: ["article"],
+      },
+    });
 
-  return data.data;
+    return data.data;
+  } catch (error) {
+    return null;
+  }
 };
 
 export const getDetailArticleBySlug = async (
@@ -340,20 +369,74 @@ export const getStaffByUsername = async (locale: Locale, username: string) => {
 };
 
 export const getListStaff = async (locale: Locale) => {
-  const data = await api.get(API_ROUTES.AUTHOR, {
-    params: {
-      locale,
-      fields: ["username", "displayName"],
-      populate: {
-        avatar: {
-          fields: ["url", "alternativeText", "width", "height"],
+  try {
+    const data = await api.get(API_ROUTES.AUTHOR, {
+      params: {
+        locale,
+        fields: ["username", "displayName"],
+        populate: {
+          avatar: {
+            fields: ["url", "alternativeText", "width", "height"],
+          },
         },
       },
-    },
-    next: {
-      tags: ["author"],
-    },
-  });
+      next: {
+        tags: ["author"],
+      },
+    });
 
-  return data.data;
+    return data.data;
+  } catch (error) {
+    return null;
+  }
+};
+
+export const getListEventByNavigationId = async (
+  locale: Locale,
+  navigationId: number
+) => {
+  try {
+    const data = await api.get(API_ROUTES.EVENT, {
+      params: {
+        locale,
+        filters: {
+          insertToPage: {
+            id: {
+              $eq: navigationId,
+            },
+          },
+        },
+        fields: [
+          "name",
+          "shortDescription",
+          "description",
+          "slug",
+          "startDate",
+          "endDate",
+          "location",
+          "organizer",
+          "speakers",
+        ],
+        populate: {
+          thumbnail: {
+            fields: ["url", "alternativeText", "width", "height"],
+          },
+          tag: {
+            fields: ["text", "color", "slug"],
+          },
+          insertToPage: {
+            fields: ["text", "slug"],
+          },
+          link: true,
+        },
+      },
+      next: {
+        tags: ["event"],
+      },
+    });
+
+    return data.data;
+  } catch (error) {
+    return null;
+  }
 };

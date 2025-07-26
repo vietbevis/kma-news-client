@@ -4,4 +4,5 @@ export const API_ROUTES = {
   NAVIGATION: "/api/navigations",
   ARTICLE: "/api/articles",
   AUTHOR: "/api/authors",
+  EVENT: "/api/events",
 } as const;

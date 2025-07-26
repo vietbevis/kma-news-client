@@ -71,10 +71,17 @@ export interface NavigationProps {
 }
 
 export interface NavigationItemProps {
+  id: number;
+  documentId: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
   text: string;
   slug: string;
   navigations: Omit<NavigationProps, "navigations">[];
   navigation: NavigationProps | null;
+  singlePageContent: string;
+  pageType: "news" | "staff" | "events" | "single";
 }
 
 export interface ArticleItemProps {
