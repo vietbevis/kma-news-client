@@ -16,6 +16,7 @@ import { getDetailArticleBySlug, getListArticle } from "@/data/loader";
 import { Link } from "@/i18n/navigation";
 import { formatDate, processHeadings } from "@/lib/utils";
 import { Calendar, Clock, User } from "lucide-react";
+import { Metadata } from "next";
 import { Locale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -36,7 +37,7 @@ export async function generateMetadata({
   params,
 }: {
   params: Promise<{ locale: Locale; articleSlug: string }>;
-}) {
+}): Promise<Metadata> {
   const { locale, articleSlug } = await params;
   const data = await getDetailArticleBySlug(locale, articleSlug);
   return {

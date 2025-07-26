@@ -3,6 +3,7 @@ import Header from "@/components/layouts/Header";
 import ScrollTop from "@/components/SrollTop";
 import { getGlobalSetiings } from "@/data/loader";
 import { routing } from "@/i18n/routing";
+import { Metadata } from "next";
 import { Locale, NextIntlClientProvider, hasLocale } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { Roboto, Roboto_Mono } from "next/font/google";
@@ -23,7 +24,7 @@ export const generateMetadata = async ({
   params,
 }: {
   params: Promise<{ locale: Locale }>;
-}) => {
+}): Promise<Metadata> => {
   const { locale } = await params;
   const { data } = await getGlobalSetiings(locale);
   return {

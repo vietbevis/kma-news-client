@@ -18,9 +18,11 @@ export const generateStaticParams = async ({
 }) => {
   const { locale, pageSlug } = await params;
   const data = await getNavigationBySlug(locale, pageSlug);
-  return data.data.map((item: any) => ({
-    pageSlug: item.slug === "home" ? "/" : item.slug,
-  }));
+  return data.data
+    .filter((item: any) => item.slug !== "home")
+    .map((item: any) => ({
+      pageSlug: item.slug,
+    }));
 };
 
 export default async function Page({

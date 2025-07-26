@@ -13,8 +13,13 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "minio-api.vittapcode.id.vn",
       },
+      {
+        protocol: "https",
+        hostname: "kma-admin.vittapcode.id.vn",
+      },
     ],
   },
+  output: "standalone",
 };
 
 const withNextIntl = createNextIntlPlugin();

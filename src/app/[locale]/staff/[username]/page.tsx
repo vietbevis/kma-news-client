@@ -10,6 +10,7 @@ import Image from "@/components/ui/image";
 import { getListStaff, getStaffByUsername } from "@/data/loader";
 import { StaffProps } from "@/global";
 import { Link } from "@/i18n/navigation";
+import { Metadata } from "next";
 import { Locale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -30,7 +31,7 @@ export async function generateMetadata({
   params,
 }: {
   params: Promise<{ locale: Locale; username: string }>;
-}) {
+}): Promise<Metadata> {
   const { locale, username } = await params;
   const data = await getStaffByUsername(locale, username);
   return {
