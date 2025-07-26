@@ -20,6 +20,12 @@ const nextConfig: NextConfig = {
     ],
   },
   output: "standalone",
+  // logging: {
+  //   fetches: {
+  //     fullUrl: false,
+  //     hmrRefreshes: true,
+  //   },
+  // },
 };
 
 const withNextIntl = createNextIntlPlugin();

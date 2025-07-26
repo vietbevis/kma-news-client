@@ -68,6 +68,9 @@ export const getGlobalSetiings = async (locale: Locale) => {
         },
       },
     },
+    next: {
+      tags: ["global"],
+    },
   });
   return data.data;
 };
@@ -130,6 +133,9 @@ export const getHomePage = async (locale: Locale) => {
         },
       },
     },
+    next: {
+      tags: ["home-page"],
+    },
   });
   return data.data;
 };
@@ -158,6 +164,9 @@ export const getNavigationBySlug = async (locale: Locale, pageSlug: string) => {
             fields: ["text", "slug"],
           },
         },
+      },
+      next: {
+        tags: ["navigation"],
       },
     });
 
@@ -207,6 +216,9 @@ export const getListArticleByNavigationId = async (
         },
       },
     },
+    next: {
+      tags: ["article"],
+    },
   });
 
   return data.data;
@@ -217,6 +229,9 @@ export const getListArticle = async (locale: Locale) => {
     params: {
       locale,
       fields: ["slug"],
+    },
+    next: {
+      tags: ["article"],
     },
   });
 
@@ -280,6 +295,9 @@ export const getDetailArticleBySlug = async (
           },
         },
       },
+      next: {
+        tags: ["article"],
+      },
     });
 
     return data.data;
@@ -310,6 +328,9 @@ export const getStaffByUsername = async (locale: Locale, username: string) => {
           blockDescription: true,
         },
       },
+      next: {
+        tags: ["author"],
+      },
     });
 
     return data.data;
@@ -328,6 +349,9 @@ export const getListStaff = async (locale: Locale) => {
           fields: ["url", "alternativeText", "width", "height"],
         },
       },
+    },
+    next: {
+      tags: ["author"],
     },
   });
 

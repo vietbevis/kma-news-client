@@ -6,6 +6,7 @@ import {
 } from "@/global";
 import { Link } from "@/i18n/navigation";
 import { Mail, MapPin, Phone } from "lucide-react";
+import { Locale } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import SocialLink from "../SocialLink";
 import Image from "../ui/image";
@@ -20,7 +21,7 @@ interface FooterProps {
   copyRight: CopyRightProps;
 }
 
-export default async function Footer(data: FooterProps) {
+export default async function Footer(data: FooterProps & { locale: Locale }) {
   const t = await getTranslations("Footer");
 
   return (
@@ -126,7 +127,11 @@ export default async function Footer(data: FooterProps) {
                 <ul className="space-y-2 text-sm">
                   {quickLink.navigations.map((navigation) => (
                     <li key={navigation.slug}>
-                      <Link href={navigation.slug} className="text-white">
+                      <Link
+                        href={`/${navigation.slug}`}
+                        locale={data.locale}
+                        className="text-white"
+                      >
                         {navigation.text}
                       </Link>
                     </li>

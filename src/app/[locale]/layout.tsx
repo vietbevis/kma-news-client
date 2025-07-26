@@ -74,8 +74,8 @@ export default async function LocaleLayout({
       <body className={`${roboto.variable} ${robotoMono.variable} antialiased`}>
         <NextIntlClientProvider messages={messages}>
           <Header {...data.header} locale={locale} />
-          {children}
-          <Footer {...data.footer} />
+          <main className="max-w-[2400px] mx-auto">{children}</main>
+          <Footer {...data.footer} locale={locale} />
           <ScrollTop />
         </NextIntlClientProvider>
       </body>

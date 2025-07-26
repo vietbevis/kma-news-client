@@ -1,10 +1,41 @@
 import Container from "@/components/Container";
 import Image from "@/components/ui/image";
-import { getListStaff } from "@/data/loader";
+import { getGlobalSetiings, getListStaff } from "@/data/loader";
 import { StaffProps } from "@/global";
 import { Link } from "@/i18n/navigation";
+import { Metadata } from "next";
 import { Locale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+
+export const generateMetadata = async ({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>;
+}): Promise<Metadata> => {
+  const { locale } = await params;
+  const { data } = await getGlobalSetiings(locale);
+  const t = await getTranslations("Common");
+
+  return {
+    title: t("staff"),
+    description: t("staff"),
+    openGraph: {
+      title: t("staff"),
+      description: t("staff"),
+      images: [
+        {
+          url: data.favicon.url,
+          width: data.favicon.width,
+          height: data.favicon.height,
+          alt: data.favicon.alternativeText,
+        },
+      ],
+    },
+    icons: {
+      icon: data.favicon.url,
+    },
+  };
+};
 
 export default async function StaffsPage({
   params,
@@ -14,10 +45,7 @@ export default async function StaffsPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const t = await getTranslations("Common");
-
   const data = await getListStaff(locale);
-  console.log("🚀 ~ StaffsPage ~ data:", data);
 
   return (
     <Container className="py-4">
