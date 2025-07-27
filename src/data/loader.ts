@@ -69,7 +69,7 @@ export const getGlobalSetiings = async (locale: Locale) => {
       },
     },
     next: {
-      tags: ["global"],
+      tags: ["global", "navigation"],
     },
   });
   return data.data;
