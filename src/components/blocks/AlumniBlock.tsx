@@ -27,13 +27,15 @@ export default function AlumniBlock(data: AlumniBlockProps) {
           <div className="inline-flex items-center gap-3">
             <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent flex-1"></div>
             <div className="relative">
-              <h2 className="text-4xl uppercase font-bold">{data.title}</h2>
+              <h2 className="xl:text-4xl md:text-3xl text-2xl uppercase font-bold">
+                {data.title}
+              </h2>
               <div className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-gradient-to-r from-red-500/60 to-red-500 rounded-full"></div>
             </div>
             <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent flex-1"></div>
           </div>
           {data.summary && (
-            <p className="text-muted-foreground mt-6 text-md max-w-2xl mx-auto leading-relaxed">
+            <p className="text-muted-foreground mt-6 text-base lg:text-md max-w-2xl mx-auto leading-relaxed">
               {data.summary}
             </p>
           )}

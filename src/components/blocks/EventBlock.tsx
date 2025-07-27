@@ -35,7 +35,7 @@ export default function EventBlock(data: EventBlockProps) {
             <div className="inline-flex items-center gap-3">
               <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent flex-1"></div>
               <div className="relative">
-                <h2 className="text-4xl uppercase font-bold text-white">
+                <h2 className="xl:text-4xl md:text-3xl text-2xl uppercase font-bold text-white">
                   {data.title}
                 </h2>
                 <div className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-16 h-[2px] bg-gradient-to-r from-red-500/60 to-red-500 rounded-full"></div>
@@ -43,7 +43,7 @@ export default function EventBlock(data: EventBlockProps) {
               <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent flex-1"></div>
             </div>
             {data.summary && (
-              <p className="mt-6 text-md text-white/90 max-w-2xl mx-auto leading-relaxed">
+              <p className="mt-6 text-base lg:text-md text-white/90 max-w-2xl mx-auto leading-relaxed">
                 {data.summary}
               </p>
             )}
