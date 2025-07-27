@@ -492,3 +492,21 @@ export const getDetailEventBySlug = async (
     return null;
   }
 };
+
+export const getListEvent = async (locale: Locale) => {
+  try {
+    const data = await api.get(API_ROUTES.EVENT, {
+      params: {
+        locale,
+        fields: ["slug"],
+      },
+      next: {
+        tags: ["event"],
+      },
+    });
+
+    return data.data;
+  } catch (error) {
+    return null;
+  }
+};

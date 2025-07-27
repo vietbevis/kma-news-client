@@ -14,6 +14,7 @@ import {
 import Image from "@/components/ui/image";
 import envConfig from "@/config/env-config";
 import { getDetailArticleBySlug, getListArticle } from "@/data/loader";
+import { ArticlesProps } from "@/global";
 import { Link } from "@/i18n/navigation";
 import { checkIsHeading, formatDate, processHeadings } from "@/lib/utils";
 import { Calendar, Clock, User } from "lucide-react";
@@ -41,18 +42,38 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale, articleSlug } = await params;
   const data = await getDetailArticleBySlug(locale, articleSlug);
+  const articleData = data.data[0] as ArticlesProps;
   return {
-    title: data.data[0].title,
-    description: data.data[0].shortDescription,
+    title: articleData.title,
+    description: articleData.shortDescription,
+    alternates: {
+      canonical: `${envConfig.NEXT_PUBLIC_APP_URL}/${locale}/news/${articleSlug}`,
+      languages: {
+        "vi-VN": `${envConfig.NEXT_PUBLIC_APP_URL}/vi/news/${articleSlug}`,
+        "en-US": `${envConfig.NEXT_PUBLIC_APP_URL}/en/news/${articleSlug}`,
+      },
+    },
     openGraph: {
-      title: data.data[0].title,
-      description: data.data[0].shortDescription,
+      title: articleData.title,
+      description: articleData.shortDescription,
       images: [
         {
-          url: data.data[0].thumbnail.url,
-          width: data.data[0].thumbnail.width,
-          height: data.data[0].thumbnail.height,
-          alt: data.data[0].thumbnail.alternativeText,
+          url: articleData.thumbnail.url,
+          width: articleData.thumbnail.width,
+          height: articleData.thumbnail.height,
+          alt: articleData.thumbnail.alternativeText,
+        },
+      ],
+    },
+    twitter: {
+      title: articleData.title,
+      description: articleData.shortDescription,
+      images: [
+        {
+          url: articleData.thumbnail.url,
+          width: articleData.thumbnail.width,
+          height: articleData.thumbnail.height,
+          alt: articleData.thumbnail.alternativeText,
         },
       ],
     },

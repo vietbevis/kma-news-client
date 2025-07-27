@@ -12,14 +12,72 @@ import {
 } from "@/components/ui/breadcrumb";
 import Image from "@/components/ui/image";
 import envConfig from "@/config/env-config";
-import { getDetailEventBySlug } from "@/data/loader";
+import { getDetailEventBySlug, getListEvent } from "@/data/loader";
 import { EventProps } from "@/global";
 import { Link } from "@/i18n/navigation";
 import { formatDate, formatEventTime } from "@/lib/utils";
 import { Calendar, Clock, MapPin, User } from "lucide-react";
+import { Metadata } from "next";
 import { Locale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
+
+export async function generateStaticParams({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>;
+}) {
+  const { locale } = await params;
+  const data = await getListEvent(locale);
+  return data.data.map((item: { slug: string }) => ({
+    eventSlug: item.slug,
+  }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: Locale; eventSlug: string }>;
+}): Promise<Metadata> {
+  const { locale, eventSlug } = await params;
+  const data = await getDetailEventBySlug(locale, eventSlug);
+  const eventData = data.data[0] as EventProps;
+  return {
+    title: eventData.name,
+    description: eventData.shortDescription,
+    alternates: {
+      canonical: `${envConfig.NEXT_PUBLIC_APP_URL}/${locale}/events/${eventData.slug}`,
+      languages: {
+        "vi-VN": `${envConfig.NEXT_PUBLIC_APP_URL}/vi/events/${eventData.slug}`,
+        "en-US": `${envConfig.NEXT_PUBLIC_APP_URL}/en/events/${eventData.slug}`,
+      },
+    },
+    openGraph: {
+      title: eventData.name,
+      description: eventData.shortDescription,
+      images: [
+        {
+          url: eventData.thumbnail.url,
+          width: eventData.thumbnail.width,
+          height: eventData.thumbnail.height,
+          alt: eventData.thumbnail.alternativeText,
+        },
+      ],
+    },
+    twitter: {
+      title: eventData.name,
+      description: eventData.shortDescription,
+      images: [
+        {
+          url: eventData.thumbnail.url,
+          width: eventData.thumbnail.width,
+          height: eventData.thumbnail.height,
+          alt: eventData.thumbnail.alternativeText,
+        },
+      ],
+    },
+  };
+}
 
 export default async function EventPage({
   params,

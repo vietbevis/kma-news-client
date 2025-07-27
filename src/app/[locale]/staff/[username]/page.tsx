@@ -8,6 +8,7 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 import Image from "@/components/ui/image";
+import envConfig from "@/config/env-config";
 import { getListStaff, getStaffByUsername } from "@/data/loader";
 import { StaffProps } from "@/global";
 import { Link } from "@/i18n/navigation";
@@ -35,18 +36,38 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale, username } = await params;
   const data = await getStaffByUsername(locale, username);
+  const staffData = data.data[0] as StaffProps;
   return {
-    title: data.data[0].displayName,
-    description: data.data[0].position,
+    title: staffData.displayName,
+    description: staffData.position,
+    alternates: {
+      canonical: `${envConfig.NEXT_PUBLIC_APP_URL}/${locale}/staff/${username}`,
+      languages: {
+        "vi-VN": `${envConfig.NEXT_PUBLIC_APP_URL}/vi/staff/${username}`,
+        "en-US": `${envConfig.NEXT_PUBLIC_APP_URL}/en/staff/${username}`,
+      },
+    },
     openGraph: {
-      title: data.data[0].displayName,
-      description: data.data[0].position,
+      title: staffData.displayName,
+      description: staffData.position,
       images: [
         {
-          url: data.data[0].avatar.url,
-          width: data.data[0].avatar.width,
-          height: data.data[0].avatar.height,
-          alt: data.data[0].avatar.alternativeText,
+          url: staffData.avatar.url,
+          width: staffData.avatar.width,
+          height: staffData.avatar.height,
+          alt: staffData.avatar.alternativeText,
+        },
+      ],
+    },
+    twitter: {
+      title: staffData.displayName,
+      description: staffData.position,
+      images: [
+        {
+          url: staffData.avatar.url,
+          width: staffData.avatar.width,
+          height: staffData.avatar.height,
+          alt: staffData.avatar.alternativeText,
         },
       ],
     },
