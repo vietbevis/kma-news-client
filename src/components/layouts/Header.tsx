@@ -214,7 +214,7 @@ export default function Header({
         </div>
       </header>
       {/* Header Bottom - Navigation */}
-      <div className="bg-white border-b h-11 hidden lg:block sticky top-0 z-20 shadow">
+      <div className="bg-white border-b h-11 hidden lg:block sticky top-0 z-50 shadow">
         <div className="container mx-auto px-4">
           <div className="flex items-center py-1.5">
             <Menubar className="border-none bg-transparent p-0 h-auto shadow-none">
