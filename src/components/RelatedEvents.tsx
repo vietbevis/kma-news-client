@@ -20,8 +20,8 @@ export default async function RelatedEvents({
       <CardContent className="flex flex-col gap-2 p-2">
         {relatedEvents.map((event) => (
           <Link key={event.id} href={`/events/${event.slug}`} className="group">
-            <div className="flex flex-col sm:flex-row items-start hover:bg-gray-50 p-2 rounded-lg transition-colors">
-              <div className="flex-shrink-0 size-20 overflow-hidden rounded-md mb-3 sm:mb-0 sm:mr-4">
+            <div className="flex gap-2 sm:gap-4 items-start hover:bg-gray-50 p-2 rounded-lg transition-colors">
+              <div className="flex-shrink-0 size-20 overflow-hidden rounded-md">
                 <Image
                   image={event.thumbnail}
                   className="object-cover w-full h-full"

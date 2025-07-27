@@ -121,3 +121,8 @@ export function formatDateRange(startDate: string, endDate: string) {
 
   return `${startFormatted} - ${endFormatted}`;
 }
+
+export function checkIsHeading(html: string) {
+  const $ = cheerio.load(html);
+  return $("h1, h2, h3, h4, h5, h6").length > 0;
+}

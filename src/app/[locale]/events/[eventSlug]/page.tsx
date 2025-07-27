@@ -89,8 +89,8 @@ export default async function EventPage({
               {eventData.shortDescription}
             </p>
             <div className="flex items-center justify-between flex-wrap gap-2 text-sm">
-              <div className="flex items-center gap-2">
-                <span className="text-muted-foreground flex items-center gap-2">
+              <div className="flex items-start gap-2">
+                <span className="text-muted-foreground flex items-center gap-2 text-nowrap whitespace-nowrap">
                   <User className="w-4 h-4" />
                   {t("speakers")}:
                 </span>{" "}
@@ -98,8 +98,8 @@ export default async function EventPage({
                   {eventData.speakers}
                 </span>
               </div>
-              <div className="flex items-center gap-2">
-                <span className="text-muted-foreground flex items-center gap-2">
+              <div className="flex items-start gap-2">
+                <span className="text-muted-foreground flex items-center gap-2 text-nowrap whitespace-nowrap">
                   <Clock className="w-4 h-4" />
                   {t("updatedAt")}:
                 </span>{" "}
@@ -107,15 +107,15 @@ export default async function EventPage({
               </div>
             </div>
             <div className="flex items-center gap-2 flex-wrap justify-between mt-2 text-sm">
-              <div className="flex items-center gap-2">
-                <span className="text-muted-foreground flex items-center gap-2">
+              <div className="flex items-start gap-2">
+                <span className="text-muted-foreground flex items-center gap-2 text-nowrap whitespace-nowrap">
                   <MapPin className="w-4 h-4" />
                   {t("location")}:
                 </span>{" "}
                 <span>{eventData.location}</span>
               </div>
-              <div className="flex items-center gap-2">
-                <span className="text-muted-foreground flex items-center gap-2">
+              <div className="flex items-start gap-2">
+                <span className="text-muted-foreground flex items-center gap-2 text-nowrap whitespace-nowrap">
                   <Calendar className="w-4 h-4" />
                   {t("date")}:{" "}
                 </span>{" "}

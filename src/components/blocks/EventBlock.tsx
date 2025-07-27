@@ -4,13 +4,20 @@ import { ArrowRight } from "lucide-react";
 import CardEvent from "../CardEvent";
 import Container from "../Container";
 import { Button } from "../ui/button";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "../ui/carousel";
 import Image from "../ui/image";
 
 export default function EventBlock(data: EventBlockProps) {
-  const displayEvents = data.events.slice(0, 4);
+  const displayEvents = data?.events || [];
   return (
     <section
-      className={`overflow-hidden ${
+      className={`overflow-hidden group ${
         data.isBackgroundHighlight ? "bg-blue-100" : ""
       }`}
     >
@@ -42,10 +49,27 @@ export default function EventBlock(data: EventBlockProps) {
             )}
           </div>
           {/* Events Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-12">
-            {displayEvents.map((event) => (
-              <CardEvent key={event.slug} {...event} />
-            ))}
+          <div className="relative">
+            <Carousel
+              opts={{
+                align: "start",
+                loop: true,
+              }}
+              className="w-full"
+            >
+              <CarouselContent className="-ml-2 md:-ml-4">
+                {displayEvents.map((event) => (
+                  <CarouselItem
+                    key={event.slug}
+                    className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4"
+                  >
+                    <CardEvent {...event} />
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="-left-4 md:-left-12 md:hidden md:group-hover:flex" />
+              <CarouselNext className="-right-4 md:-right-12 md:hidden md:group-hover:flex" />
+            </Carousel>
           </div>
         </Container>
       </div>

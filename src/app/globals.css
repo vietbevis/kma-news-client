@@ -180,3 +180,7 @@ a.toc-link:hover {
 .is-active-link::before {
   background-color: var(--color-blue-900);
 }
+
+.prose ul li p {
+  margin-left: 0 !important;
+}

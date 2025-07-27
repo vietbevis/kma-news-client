@@ -40,7 +40,7 @@ export default function SliderBlock(data: SliderBlockProps) {
 
   return (
     <section
-      className={`relative pb-8 ${
+      className={`relative pb-8 group ${
         data.isBackgroundHighlight ? "bg-blue-100" : ""
       }`}
     >
@@ -61,7 +61,7 @@ export default function SliderBlock(data: SliderBlockProps) {
         <CarouselContent>
           {[...data.articles, ...data.events].map((article, index) => (
             <CarouselItem key={article.slug}>
-              <div className="relative h-[500px] overflow-hidden">
+              <div className="relative h-[400px] xl:h-[550px] overflow-hidden">
                 {/* Background Image */}
                 <Image
                   image={article.thumbnail}
@@ -85,12 +85,12 @@ export default function SliderBlock(data: SliderBlockProps) {
                       </div>
 
                       {/* Title */}
-                      <h1 className="text-3xl md:text-3xl lg:text-4xl font-bold text-white mb-4 leading-tight">
+                      <h1 className="text-2xl md:text-3xl line-clamp-3 lg:text-4xl font-bold text-white mb-4 leading-tight">
                         {"title" in article ? article.title : article.name}
                       </h1>
 
                       {/* Description */}
-                      <p className="text-md md:text-lg text-white/90 mb-8 leading-relaxed line-clamp-3">
+                      <p className="text-sm sm:text-md md:text-lg text-white/90 mb-8 leading-relaxed line-clamp-3">
                         {article.shortDescription}
                       </p>
 
@@ -116,8 +116,8 @@ export default function SliderBlock(data: SliderBlockProps) {
         </CarouselContent>
 
         {/* Navigation Arrows */}
-        <CarouselPrevious className="hidden sm:flex absolute left-4 top-1/2 -translate-y-1/2 bg-background/20 backdrop-blur-sm border-white/20 text-white hover:bg-background/30" />
-        <CarouselNext className="hidden sm:flex absolute right-4 top-1/2 -translate-y-1/2 bg-background/20 backdrop-blur-sm border-white/20 text-white hover:bg-background/30" />
+        <CarouselPrevious className="hidden md:group-hover:flex absolute left-4 top-1/2 -translate-y-1/2 bg-background/20 backdrop-blur-sm border-white/20 text-white hover:bg-background/30" />
+        <CarouselNext className="hidden md:group-hover:flex absolute right-4 top-1/2 -translate-y-1/2 bg-background/20 backdrop-blur-sm border-white/20 text-white hover:bg-background/30" />
 
         {/* Dots Indicator */}
         <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex space-x-2">

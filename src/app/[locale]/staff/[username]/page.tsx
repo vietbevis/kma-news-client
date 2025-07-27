@@ -86,7 +86,7 @@ export default async function StaffPage({
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-      <div className="grid grid-cols-12 gap-8 items-start">
+      <div className="grid grid-cols-12 space-y-8 lg:space-y-0 lg:space-x-8 items-start">
         <div className="col-span-12 lg:col-span-4 xl:col-span-3 flex flex-col gap-4 lg:sticky lg:top-16">
           <div className="aspect-[3/4] overflow-hidden">
             <Image
@@ -99,14 +99,14 @@ export default async function StaffPage({
               {staff.name}
             </h2>
             <div
-              className="prose prose-sm max-w-none"
+              className="prose max-w-none"
               dangerouslySetInnerHTML={{ __html: staff.position }}
             />
-            <p className="text-sm">
+            <p>
               <strong>Email:</strong>{" "}
               <a href={`mailto:${staff.email}`}>{staff.email}</a>
             </p>
-            <p className="text-sm">
+            <p>
               <strong>Website:</strong>{" "}
               <a href={staff.web} target="_blank" rel="noopener noreferrer">
                 {staff.web}

@@ -15,7 +15,7 @@ import Image from "@/components/ui/image";
 import envConfig from "@/config/env-config";
 import { getDetailArticleBySlug, getListArticle } from "@/data/loader";
 import { Link } from "@/i18n/navigation";
-import { formatDate, processHeadings } from "@/lib/utils";
+import { checkIsHeading, formatDate, processHeadings } from "@/lib/utils";
 import { Calendar, Clock, User } from "lucide-react";
 import { Metadata } from "next";
 import { Locale } from "next-intl";
@@ -75,12 +75,14 @@ export default async function NewsPage({
 
   const article = data.data[0];
 
+  const isHeading = checkIsHeading(article.content);
+
   return (
     <Container className="py-4">
       <div className="grid grid-cols-12 gap-6">
         <div className="lg:col-span-8 xl:col-span-9 col-span-12">
           {article.insertToPage && (
-            <Breadcrumb className="mb-6">
+            <Breadcrumb className="mb-3">
               <BreadcrumbList className="flex-nowrap">
                 <BreadcrumbItem className="text-nowrap whitespace-nowrap inline-block">
                   <BreadcrumbLink asChild>
@@ -141,7 +143,7 @@ export default async function NewsPage({
                   </div>
                 )}
               </div>
-              <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
+              <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
                 <div className="flex items-center gap-2">
                   <Calendar className="w-4 h-4" />
                   <span>
@@ -163,7 +165,11 @@ export default async function NewsPage({
               className="w-full h-auto rounded-lg shadow-lg aspect-video object-cover"
             />
           </div>
-          <article className="prose js-toc-content max-w-none w-full">
+          <article
+            className={`prose max-w-none w-full ${
+              isHeading ? "js-toc-content" : ""
+            }`}
+          >
             <div
               dangerouslySetInnerHTML={{
                 __html: processHeadings(article.content),
@@ -173,7 +179,7 @@ export default async function NewsPage({
         </div>
         <div className="lg:col-span-4 xl:col-span-3 col-span-12">
           <div className="sticky top-16 flex flex-col gap-4">
-            <TableOfContents />
+            {isHeading && <TableOfContents />}
             {article.relatedArticles && article.relatedArticles.length > 0 && (
               <RelatedArticles relatedArticles={article.relatedArticles} />
             )}

@@ -1,18 +1,25 @@
 import { NewsBlockProps } from "@/global";
 import { Link } from "@/i18n/navigation";
 import { ArrowRight } from "lucide-react";
-import { getTranslations } from "next-intl/server";
 import CardArticle from "../CardArticle";
 import Container from "../Container";
 import { Button } from "../ui/button";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "../ui/carousel";
 
 export default async function NewsBlock(data: NewsBlockProps) {
-  const displayArticles = data.articles.slice(0, 4);
-  const t = await getTranslations("Common");
+  const displayArticles = data?.articles || [];
 
   return (
     <section
-      className={`pt-12 ${data.isBackgroundHighlight ? "bg-blue-100" : ""}`}
+      className={`pt-12 group ${
+        data.isBackgroundHighlight ? "bg-blue-100" : ""
+      }`}
     >
       <Container>
         <div className="mb-12 text-center">
@@ -31,10 +38,27 @@ export default async function NewsBlock(data: NewsBlockProps) {
           )}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-12">
-          {displayArticles.map((article) => (
-            <CardArticle key={article.slug} {...article} />
-          ))}
+        <div className="relative mb-12">
+          <Carousel
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            className="w-full"
+          >
+            <CarouselContent className="-ml-2 md:-ml-4">
+              {displayArticles.map((article) => (
+                <CarouselItem
+                  key={article.slug}
+                  className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4"
+                >
+                  <CardArticle {...article} />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="-left-4 md:-left-12 md:hidden md:group-hover:flex" />
+            <CarouselNext className="-right-4 md:-right-12 md:hidden md:group-hover:flex" />
+          </Carousel>
         </div>
       </Container>
       {/* View More Link */}

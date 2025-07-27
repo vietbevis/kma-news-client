@@ -2,16 +2,26 @@ import { TrainingBlockProps } from "@/global";
 import { Link } from "@/i18n/navigation";
 import { ArrowRight, BookOpen } from "lucide-react";
 import CardArticle from "../CardArticle";
+import Container from "../Container";
 import { Button } from "../ui/button";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "../ui/carousel";
 
 export default function TrainingBlock(data: TrainingBlockProps) {
-  const displayArticles = data.articles.slice(0, 4);
+  const displayArticles = data?.articles || [];
 
   return (
     <section
-      className={`py-20 ${data.isBackgroundHighlight ? "bg-blue-100" : ""}`}
+      className={`py-20 group ${
+        data.isBackgroundHighlight ? "bg-blue-100" : ""
+      }`}
     >
-      <div className="container mx-auto px-4">
+      <Container>
         {/* Section Header */}
         <div className="mb-12 text-center">
           <div className="inline-flex items-center gap-3">
@@ -30,10 +40,27 @@ export default function TrainingBlock(data: TrainingBlockProps) {
         </div>
 
         {/* Training Programs Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mb-12">
-          {displayArticles.map((article) => (
-            <CardArticle key={article.slug} {...article} />
-          ))}
+        <div className="relative mb-12">
+          <Carousel
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            className="w-full"
+          >
+            <CarouselContent className="-ml-2 md:-ml-4">
+              {displayArticles.map((article) => (
+                <CarouselItem
+                  key={article.slug}
+                  className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4"
+                >
+                  <CardArticle {...article} />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="-left-4 md:-left-12 md:hidden md:group-hover:flex" />
+            <CarouselNext className="-right-4 md:-right-12 md:hidden md:group-hover:flex" />
+          </Carousel>
         </div>
 
         {/* View More Link */}
@@ -59,7 +86,7 @@ export default function TrainingBlock(data: TrainingBlockProps) {
             </Button>
           </div>
         )}
-      </div>
+      </Container>
     </section>
   );
 }
