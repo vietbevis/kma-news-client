@@ -1,12 +1,18 @@
-import { Block } from "@/global";
+import { Block, SubjectTypeProps } from "@/global";
 import AlumniBlock from "./blocks/AlumniBlock";
+import BlockDescription from "./blocks/BlockDescription";
 import CooperationBlock from "./blocks/CooperationBlock";
 import EventBlock from "./blocks/EventBlock";
 import NewsBlock from "./blocks/NewsBlock";
+import SemesterBlock from "./blocks/SemesterBlock";
 import SliderBlock from "./blocks/SliderBlock";
 import TrainingBlock from "./blocks/TrainingBlock";
 
-function renderBlock(block: Block, index: number) {
+function renderBlock(
+  block: Block,
+  index: number,
+  subjectType?: SubjectTypeProps[]
+) {
   switch (block.__component) {
     case "blocks.common-block":
       switch (block.variants) {
@@ -25,11 +31,28 @@ function renderBlock(block: Block, index: number) {
         default:
           return null;
       }
+    case "blocks.semester-block":
+      return (
+        <SemesterBlock
+          data={block}
+          key={index}
+          id={index}
+          subjectType={subjectType}
+        />
+      );
+    case "elements.block-description":
+      return <BlockDescription {...block} key={index} id={index} />;
     default:
       return null;
   }
 }
 
-export function BlockRenderer({ blocks }: { blocks: Block[] }) {
-  return blocks.map((block, index) => renderBlock(block, index));
+export function BlockRenderer({
+  blocks,
+  subjectType,
+}: {
+  blocks: Block[];
+  subjectType?: SubjectTypeProps[];
+}) {
+  return blocks.map((block, index) => renderBlock(block, index, subjectType));
 }

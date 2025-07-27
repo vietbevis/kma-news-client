@@ -26,7 +26,14 @@
     "staff": "Đội ngũ giảng viên",
     "speakers": "Diễn giả",
     "location": "Địa điểm",
-    "date": "Ngày"
+    "date": "Ngày",
+    "credits": "Tín chỉ",
+    "subjectTypesLegend": "Chú thích loại môn học",
+    "content": "Nội dung",
+    "industryCode": "Mã ngành",
+    "studyTime": "Thời gian",
+    "admissionPeriod": "Kì nhập học",
+    "facility": "Cơ sở"
   },
   "Footer": {
     "followUs": "Theo dõi chúng tôi:",

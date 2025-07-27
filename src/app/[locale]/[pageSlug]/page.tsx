@@ -24,7 +24,9 @@ export const generateStaticParams = async ({
   const { locale } = await params;
   const data = await getAllNavigation(locale);
   return data.data
-    .filter((item: any) => item.slug !== "home")
+    .filter(
+      (item: any) => item.slug !== "home" && item.slug !== "educational-program"
+    )
     .map((item: any) => ({
       pageSlug: item.slug,
     }));

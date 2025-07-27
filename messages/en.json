@@ -26,7 +26,14 @@
     "staff": "Staff",
     "speakers": "Speakers",
     "location": "Location",
-    "date": "Date"
+    "date": "Date",
+    "credits": "Credits",
+    "subjectTypesLegend": "Subject Types Legend",
+    "content": "Content",
+    "industryCode": "Major Code",
+    "studyTime": "Study Time",
+    "admissionPeriod": "Admission Period",
+    "facility": "Facility"
   },
   "Footer": {
     "followUs": "Follow us:",

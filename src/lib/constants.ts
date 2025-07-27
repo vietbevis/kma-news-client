@@ -5,4 +5,6 @@ export const API_ROUTES = {
   ARTICLE: "/api/articles",
   AUTHOR: "/api/authors",
   EVENT: "/api/events",
+  EDUCATIONAL_PROGRAM: "/api/educational-program",
+  SUBJECT_TYPE: "/api/subject-types",
 } as const;

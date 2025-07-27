@@ -134,7 +134,7 @@ export const getHomePage = async (locale: Locale) => {
       },
     },
     next: {
-      tags: ["home-page"],
+      tags: ["home-page", "article", "event", "tag", "navigation"],
     },
   });
   return data.data;
@@ -239,7 +239,7 @@ export const getListArticleByNavigationId = async (
         },
       },
       next: {
-        tags: ["article"],
+        tags: ["article", "tag", "navigation"],
       },
     });
 
@@ -257,7 +257,7 @@ export const getListArticle = async (locale: Locale) => {
         fields: ["slug"],
       },
       next: {
-        tags: ["article"],
+        tags: ["article", "tag", "navigation"],
       },
     });
 
@@ -325,7 +325,7 @@ export const getDetailArticleBySlug = async (
         },
       },
       next: {
-        tags: ["article"],
+        tags: ["article", "tag", "navigation"],
       },
     });
 
@@ -358,7 +358,7 @@ export const getStaffByUsername = async (locale: Locale, username: string) => {
         },
       },
       next: {
-        tags: ["author"],
+        tags: ["author", "tag", "navigation"],
       },
     });
 
@@ -381,7 +381,7 @@ export const getListStaff = async (locale: Locale) => {
         },
       },
       next: {
-        tags: ["author"],
+        tags: ["author", "tag", "navigation"],
       },
     });
 
@@ -430,7 +430,7 @@ export const getListEventByNavigationId = async (
         },
       },
       next: {
-        tags: ["event"],
+        tags: ["event", "tag", "navigation"],
       },
     });
 
@@ -483,7 +483,7 @@ export const getDetailEventBySlug = async (
         },
       },
       next: {
-        tags: ["event"],
+        tags: ["event", "tag", "navigation"],
       },
     });
 
@@ -501,7 +501,71 @@ export const getListEvent = async (locale: Locale) => {
         fields: ["slug"],
       },
       next: {
-        tags: ["event"],
+        tags: ["event", "tag", "navigation"],
+      },
+    });
+
+    return data.data;
+  } catch (error) {
+    return null;
+  }
+};
+
+export const getEducationalProgram = async (locale: Locale) => {
+  try {
+    const data = await api.get(API_ROUTES.EDUCATIONAL_PROGRAM, {
+      params: {
+        locale,
+        populate: {
+          thumbnail: {
+            fields: ["url", "alternativeText", "width", "height"],
+          },
+          blocks: {
+            on: {
+              "blocks.semester-block": {
+                populate: {
+                  semesters: {
+                    fields: ["name"],
+                    populate: {
+                      subjects: {
+                        fields: ["name", "credits"],
+                        populate: {
+                          subjectType: {
+                            fields: ["type", "color"],
+                          },
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+              "elements.block-description": {
+                populate: "*",
+              },
+            },
+          },
+        },
+      },
+      next: {
+        tags: ["educational-program", "subject-type", "semester", "subject"],
+      },
+    });
+
+    return data.data;
+  } catch (error) {
+    return null;
+  }
+};
+
+export const getSubjectType = async (locale: Locale) => {
+  try {
+    const data = await api.get(API_ROUTES.SUBJECT_TYPE, {
+      params: {
+        locale,
+        fields: ["type", "color"],
+      },
+      next: {
+        tags: ["subject-type"],
       },
     });
 

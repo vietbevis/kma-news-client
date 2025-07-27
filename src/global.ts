@@ -76,6 +76,28 @@ export interface NavigationProps {
   navigations: NavigationProps[];
 }
 
+export interface SemesterProps {
+  id: number;
+  documentId: string;
+  name: string;
+  subjects: SubjectProps[];
+}
+
+export interface SubjectProps {
+  id: number;
+  documentId: string;
+  name: string;
+  credits: number;
+  subjectType: SubjectTypeProps;
+}
+
+export interface SubjectTypeProps {
+  id: number;
+  documentId: string;
+  type: string;
+  color: string;
+}
+
 export interface NavigationItemProps {
   id: number;
   documentId: string;
@@ -136,12 +158,6 @@ export interface StaffProps {
   blockDescription: BlockDescriptionProps[];
 }
 
-export interface BlockDescriptionProps {
-  id: number;
-  title: string;
-  content: string;
-}
-
 export interface CardProps {
   header: string;
   description: string;
@@ -176,7 +192,10 @@ export interface CopyRightProps {
 
 export type QuickLinksProps = NavigationProps[];
 
-type ComponentType = "blocks.common-block";
+type ComponentType =
+  | "blocks.common-block"
+  | "blocks.semester-block"
+  | "elements.block-description";
 type BlockVariant =
   | "news"
   | "events"
@@ -204,7 +223,9 @@ export type Block =
   | EventBlockProps
   | TrainingBlockProps
   | CooperationBlockProps
-  | AlumniBlockProps;
+  | AlumniBlockProps
+  | SemesterBlockProps
+  | BlockDescriptionProps;
 
 export interface CommonBlock<T extends BlockVariant>
   extends Base<"blocks.common-block"> {
@@ -215,6 +236,16 @@ export interface CommonBlock<T extends BlockVariant>
   isBackgroundHighlight: boolean;
 }
 
+export interface SemesterBlockProps extends Base<"blocks.semester-block"> {
+  title: string;
+  semesters: SemesterProps[];
+}
+
+export interface BlockDescriptionProps
+  extends Base<"elements.block-description"> {
+  title: string;
+  content: string;
+}
 export interface SliderBlockProps extends CommonBlock<"slider"> {
   articles: ArticlesProps[];
   events: EventProps[];

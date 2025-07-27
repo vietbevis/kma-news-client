@@ -126,6 +126,7 @@ html {
   scroll-behavior: smooth;
   scrollbar-width: thin;
   scrollbar-color: var(--color-blue-900) var(--color-white);
+  scroll-padding-top: 4rem;
 }
 
 .toc {
@@ -183,4 +184,18 @@ a.toc-link:hover {
 
 .prose ul li p {
   margin-left: 0 !important;
+}
+
+.prose a {
+  @apply text-blue-900;
+}
+
+.prose p {
+  @apply my-3;
+}
+
+.semester-name {
+  writing-mode: vertical-lr;
+  transform: rotate(180deg);
+  text-orientation: mixed;
 }
