@@ -159,6 +159,13 @@ export default async function NewsPage({
               </div>
             </div>
           </div>
+          {isHeading && (
+            <TableOfContents
+              id={"mobile"}
+              className="mb-8 block lg:hidden"
+              collapseDepth={6}
+            />
+          )}
           <div className="mb-8">
             <Image
               image={article.thumbnail}
@@ -179,7 +186,13 @@ export default async function NewsPage({
         </div>
         <div className="lg:col-span-4 xl:col-span-3 col-span-12">
           <div className="sticky top-16 flex flex-col gap-4">
-            {isHeading && <TableOfContents />}
+            {isHeading && (
+              <TableOfContents
+                id={"desktop"}
+                className=" lg:flex hidden"
+                collapseDepth={6}
+              />
+            )}
             {article.relatedArticles && article.relatedArticles.length > 0 && (
               <RelatedArticles relatedArticles={article.relatedArticles} />
             )}
