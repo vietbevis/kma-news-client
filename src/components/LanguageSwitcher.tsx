@@ -35,14 +35,13 @@ export default function LanguageSwitcher({ locale }: LanguageSwitcherProps) {
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
-          className="hover:bg-blue-950 hover:text-white hover:cursor-pointer"
+          className="hover:bg-blue-950 hover:text-white hover:cursor-pointer sm:size-auto size-10"
         >
-          <Globe className="h-4 w-4 mr-2" />
+          <Globe className="h-4 w-4 sm:mr-2 mr-0" />
           <span className="hidden sm:inline">
             {locale === "vi" ? "Tiếng Việt" : "English"}
           </span>
-          <span className="sm:hidden">{locale === "vi" ? "VI" : "EN"}</span>
-          <ChevronDown className="h-4 w-4 ml-2" />
+          <ChevronDown className="h-4 w-4 ml-2 hidden sm:block" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent

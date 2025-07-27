@@ -171,16 +171,16 @@ export default function Header({
                 className="flex items-center space-x-4 hover:no-underline"
                 locale={locale}
               >
-                <div className="flex-shrink-0 size-12">
+                <div className="flex-shrink-0 sm:size-12 size-10">
                   <Image image={logo.image} />
                 </div>
-                <div className="hidden sm:block">
+                <div>
                   <h1 className="text-sm md:text-lg font-bold">{title}</h1>
                   <p className="text-xs md:text-sm text-blue-200">{subTitle}</p>
                 </div>
               </Link>
               {/* Language Switcher and Mobile Menu */}
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center">
                 {/* Language Switcher */}
                 <LanguageSwitcher locale={locale} />
                 {/* Mobile Menu Button */}
