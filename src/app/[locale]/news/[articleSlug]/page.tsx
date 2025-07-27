@@ -123,7 +123,7 @@ export default async function NewsPage({
             <h1 className="text-3xl md:text-4xl font-bold leading-tight mb-4">
               {article.title}
             </h1>
-            <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
+            <p className="text-muted-foreground mb-6 leading-relaxed">
               {article.shortDescription}
             </p>
             <div className="flex items-center justify-between flex-wrap gap-2">

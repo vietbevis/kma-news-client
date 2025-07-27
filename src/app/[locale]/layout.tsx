@@ -71,10 +71,14 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
-      <body className={`${roboto.variable} ${robotoMono.variable} antialiased`}>
+      <body
+        className={`${roboto.variable} ${robotoMono.variable} antialiased min-h-screen flex flex-col`}
+      >
         <NextIntlClientProvider messages={messages}>
           <Header {...data.header} locale={locale} />
-          <main className="max-w-[2400px] mx-auto">{children}</main>
+          <main className="max-w-[2400px] mx-auto flex-1 w-full">
+            {children}
+          </main>
           <Footer {...data.footer} locale={locale} />
           <ScrollTop />
         </NextIntlClientProvider>

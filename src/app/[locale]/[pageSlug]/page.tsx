@@ -77,10 +77,10 @@ export default async function Page({
           <SidebarNavigation {...navigation} />
         </div>
         <div className="col-span-12 lg:col-span-8 xl:col-span-9">
-          {navigation.pageType === "news" && (
+          {navigation.pageType === "news" && listArticle && (
             <ArticleGrid listArticle={listArticle.data} />
           )}
-          {navigation.pageType === "events" && (
+          {navigation.pageType === "events" && listEvent && (
             <EventsGrid listEvent={listEvent.data} />
           )}
           {navigation.pageType === "single" && (
@@ -91,7 +91,7 @@ export default async function Page({
               }}
             />
           )}
-          {navigation.pageType === "staff" && (
+          {navigation.pageType === "staff" && listStaff && (
             <StaffGrid listStaff={listStaff.data} />
           )}
         </div>

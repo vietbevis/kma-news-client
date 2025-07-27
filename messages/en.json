@@ -23,7 +23,10 @@
     "publishedAt": "Published",
     "updatedAt": "Updated",
     "author": "Author",
-    "staff": "Staff"
+    "staff": "Staff",
+    "speakers": "Speakers",
+    "location": "Location",
+    "date": "Date"
   },
   "Footer": {
     "followUs": "Follow us:",
@@ -38,5 +41,8 @@
   },
   "RelatedArticles": {
     "relatedArticles": "Related Articles"
+  },
+  "RelatedEvents": {
+    "relatedEvents": "Related Events"
   }
 }

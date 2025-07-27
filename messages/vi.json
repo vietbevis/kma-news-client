@@ -23,7 +23,10 @@
     "publishedAt": "Xuất bản",
     "updatedAt": "Cập nhật",
     "author": "Tác giả",
-    "staff": "Cán bộ giảng viên nhân viên"
+    "staff": "Cán bộ giảng viên nhân viên",
+    "speakers": "Diễn giả",
+    "location": "Địa điểm",
+    "date": "Ngày"
   },
   "Footer": {
     "followUs": "Theo dõi chúng tôi:",
@@ -38,5 +41,8 @@
   },
   "RelatedArticles": {
     "relatedArticles": "Bài viết liên quan"
+  },
+  "RelatedEvents": {
+    "relatedEvents": "Sự kiện liên quan"
   }
 }

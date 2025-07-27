@@ -50,6 +50,11 @@ export interface ArticlesProps {
 }
 
 export interface EventProps {
+  id: number;
+  documentId: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
   name: string;
   shortDescription: string;
   description: string;
@@ -59,9 +64,10 @@ export interface EventProps {
   location: string;
   organizer: string;
   speakers: string;
-  link: LinkProps;
   thumbnail: ImageProps;
   tag: TagProps;
+  insertToPage: Omit<NavigationProps, "navigations">;
+  relatedEvents: EventProps[];
 }
 
 export interface NavigationProps {

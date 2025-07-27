@@ -92,3 +92,32 @@ export function processHeadings(html: string) {
   });
   return $.html();
 }
+
+export function formatDateRange(startDate: string, endDate: string) {
+  const start = new Date(startDate);
+  const end = new Date(endDate);
+
+  const startFormatted = start.toLocaleDateString("vi-VN", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+
+  const endFormatted = end.toLocaleDateString("vi-VN", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+
+  if (startFormatted === endFormatted) {
+    return `${startFormatted} (${start.toLocaleTimeString("vi-VN", {
+      hour: "2-digit",
+      minute: "2-digit",
+    })} - ${end.toLocaleTimeString("vi-VN", {
+      hour: "2-digit",
+      minute: "2-digit",
+    })})`;
+  }
+
+  return `${startFormatted} - ${endFormatted}`;
+}

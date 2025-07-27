@@ -440,3 +440,56 @@ export const getListEventByNavigationId = async (
     return null;
   }
 };
+
+export const getDetailEventBySlug = async (
+  locale: Locale,
+  eventSlug: string
+) => {
+  try {
+    const data = await api.get(API_ROUTES.EVENT, {
+      params: {
+        locale,
+        filters: {
+          slug: {
+            $eq: eventSlug,
+          },
+        },
+        populate: {
+          thumbnail: {
+            fields: ["url", "alternativeText", "width", "height"],
+          },
+          tag: {
+            fields: ["text", "color", "slug"],
+          },
+          insertToPage: {
+            fields: ["text", "slug"],
+          },
+          relatedEvents: {
+            fields: [
+              "name",
+              "shortDescription",
+              "slug",
+              "startDate",
+              "endDate",
+              "location",
+              "organizer",
+              "speakers",
+            ],
+            populate: {
+              thumbnail: {
+                fields: ["url", "alternativeText", "width", "height"],
+              },
+            },
+          },
+        },
+      },
+      next: {
+        tags: ["event"],
+      },
+    });
+
+    return data.data;
+  } catch (error) {
+    return null;
+  }
+};
