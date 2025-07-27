@@ -27,7 +27,7 @@ export default async function SemesterBlock({ data, subjectType, id }: Props) {
       <div className="flex flex-col gap-6">
         {data.semesters.map((semester) => (
           <div key={semester.id} className="flex gap-3 items-start">
-            <h3 className="text-xl text-center uppercase font-bold semester-name text-blue-900">
+            <h3 className="text-xl text-center uppercase font-bold semester-name text-blue-900 sticky top-16">
               {semester.name}
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 w-full">
