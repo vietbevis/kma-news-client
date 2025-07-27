@@ -427,7 +427,6 @@ export const getListEventByNavigationId = async (
           insertToPage: {
             fields: ["text", "slug"],
           },
-          link: true,
         },
       },
       next: {

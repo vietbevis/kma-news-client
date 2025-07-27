@@ -70,6 +70,8 @@ export default async function Page({
     getListStaff(locale),
   ]);
 
+  console.log(listArticle, listEvent, listStaff);
+
   return (
     <Container className="py-4">
       <div className="grid grid-cols-12 gap-4">
