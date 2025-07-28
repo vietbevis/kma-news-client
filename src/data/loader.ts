@@ -575,11 +575,7 @@ export const getDetailEducationalProgram = async (
           blocks: {
             on: {
               "blocks.semester-block": {
-                populate: {
-                  semesters: {
-                    fields: ["name"],
-                  },
-                },
+                populate: "*",
               },
               "elements.block-description": {
                 populate: "*",
