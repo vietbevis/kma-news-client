@@ -543,7 +543,7 @@ export const getEducationalProgram = async (locale: Locale) => {
         },
       },
       next: {
-        tags: ["educational-program", "subject-type", "semester", "subject"],
+        tags: ["edu-program", "subject-type", "semester", "subject"],
       },
     });
 
@@ -600,7 +600,7 @@ export const getDetailEducationalProgram = async (
         },
       },
       next: {
-        tags: ["educational-program", "subject-type", "semester", "subject"],
+        tags: ["edu-program", "subject-type", "semester", "subject"],
       },
     });
 
