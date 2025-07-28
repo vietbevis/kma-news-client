@@ -239,7 +239,7 @@ export const getListArticleByNavigationId = async (
         },
       },
       next: {
-        tags: ["article", "tag", "navigation"],
+        tags: ["article", "tag", "navigation", "author"],
       },
     });
 
@@ -257,7 +257,7 @@ export const getListArticle = async (locale: Locale) => {
         fields: ["slug"],
       },
       next: {
-        tags: ["article", "tag", "navigation"],
+        tags: ["article", "tag", "navigation", "author"],
       },
     });
 
@@ -325,7 +325,7 @@ export const getDetailArticleBySlug = async (
         },
       },
       next: {
-        tags: ["article", "tag", "navigation"],
+        tags: ["article", "tag", "navigation", "author"],
       },
     });
 
@@ -358,7 +358,7 @@ export const getStaffByUsername = async (locale: Locale, username: string) => {
         },
       },
       next: {
-        tags: ["author", "tag", "navigation"],
+        tags: ["author", "tag", "navigation", "author"],
       },
     });
 
@@ -381,7 +381,7 @@ export const getListStaff = async (locale: Locale) => {
         },
       },
       next: {
-        tags: ["author", "tag", "navigation"],
+        tags: ["author", "tag", "navigation", "author"],
       },
     });
 
@@ -430,7 +430,7 @@ export const getListEventByNavigationId = async (
         },
       },
       next: {
-        tags: ["event", "tag", "navigation"],
+        tags: ["event", "tag", "navigation", "author"],
       },
     });
 
@@ -483,7 +483,7 @@ export const getDetailEventBySlug = async (
         },
       },
       next: {
-        tags: ["event", "tag", "navigation"],
+        tags: ["event", "tag", "navigation", "author"],
       },
     });
 
@@ -501,7 +501,7 @@ export const getListEvent = async (locale: Locale) => {
         fields: ["slug"],
       },
       next: {
-        tags: ["event", "tag", "navigation"],
+        tags: ["event", "tag", "navigation", "author"],
       },
     });
 
