@@ -33,7 +33,8 @@
     "industryCode": "Mã ngành",
     "studyTime": "Thời gian",
     "admissionPeriod": "Kì nhập học",
-    "facility": "Cơ sở"
+    "facility": "Cơ sở",
+    "semester": "Học kỳ"
   },
   "Footer": {
     "followUs": "Theo dõi chúng tôi:",

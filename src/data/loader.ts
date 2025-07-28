@@ -543,7 +543,7 @@ export const getEducationalProgram = async (locale: Locale) => {
         },
       },
       next: {
-        tags: ["edu-program", "subject-type", "semester", "subject"],
+        tags: ["edu-program", "subject-type", "subject"],
       },
     });
 
@@ -575,7 +575,20 @@ export const getDetailEducationalProgram = async (
           blocks: {
             on: {
               "blocks.semester-block": {
-                populate: "*",
+                populate: {
+                  semesters: {
+                    populate: {
+                      subjects: {
+                        fields: ["name", "credits"],
+                        populate: {
+                          subjectType: {
+                            fields: ["type", "color"],
+                          },
+                        },
+                      },
+                    },
+                  },
+                },
               },
               "elements.block-description": {
                 populate: "*",
@@ -585,22 +598,10 @@ export const getDetailEducationalProgram = async (
           insertToPage: {
             fields: ["text", "slug"],
           },
-          semesters: {
-            populate: {
-              subjects: {
-                fields: ["name", "credits"],
-                populate: {
-                  subjectType: {
-                    fields: ["type", "color"],
-                  },
-                },
-              },
-            },
-          },
         },
       },
       next: {
-        tags: ["edu-program", "subject-type", "semester", "subject"],
+        tags: ["edu-program", "subject-type", "subject"],
       },
     });
 

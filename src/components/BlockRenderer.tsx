@@ -1,4 +1,4 @@
-import { Block, SemesterProps, SubjectTypeProps } from "@/global";
+import { Block, SubjectTypeProps } from "@/global";
 import AlumniBlock from "./blocks/AlumniBlock";
 import BlockDescription from "./blocks/BlockDescription";
 import CooperationBlock from "./blocks/CooperationBlock";
@@ -11,8 +11,7 @@ import TrainingBlock from "./blocks/TrainingBlock";
 function renderBlock(
   block: Block,
   index: number,
-  subjectType?: SubjectTypeProps[],
-  semesters?: SemesterProps[]
+  subjectType?: SubjectTypeProps[]
 ) {
   switch (block.__component) {
     case "blocks.common-block":
@@ -39,7 +38,6 @@ function renderBlock(
           key={index}
           id={index}
           subjectType={subjectType}
-          semesters={semesters}
         />
       );
     case "elements.block-description":
@@ -52,13 +50,9 @@ function renderBlock(
 export function BlockRenderer({
   blocks,
   subjectType,
-  semesters,
 }: {
   blocks: Block[];
   subjectType?: SubjectTypeProps[];
-  semesters?: SemesterProps[];
 }) {
-  return blocks.map((block, index) =>
-    renderBlock(block, index, subjectType, semesters)
-  );
+  return blocks.map((block, index) => renderBlock(block, index, subjectType));
 }

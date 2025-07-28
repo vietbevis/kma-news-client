@@ -185,7 +185,6 @@ export default async function EducationalProgram({
             <BlockRenderer
               blocks={pageData.blocks}
               subjectType={subjectTypeData}
-              semesters={pageData.semesters}
             />
           </div>
         </div>

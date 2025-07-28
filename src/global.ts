@@ -80,7 +80,7 @@ export interface NavigationProps {
 export interface SemesterProps {
   id: number;
   documentId: string;
-  name: string;
+  semester: number;
   subjects: SubjectProps[];
 }
 

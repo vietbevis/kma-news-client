@@ -33,7 +33,8 @@
     "industryCode": "Major Code",
     "studyTime": "Study Time",
     "admissionPeriod": "Admission Period",
-    "facility": "Facility"
+    "facility": "Facility",
+    "semester": "Semester"
   },
   "Footer": {
     "followUs": "Follow us:",

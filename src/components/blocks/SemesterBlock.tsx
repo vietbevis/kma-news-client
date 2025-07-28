@@ -1,4 +1,4 @@
-import { SemesterBlockProps, SemesterProps, SubjectTypeProps } from "@/global";
+import { SemesterBlockProps, SubjectTypeProps } from "@/global";
 import { getTranslations } from "next-intl/server";
 import { Badge } from "../ui/badge";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
@@ -7,17 +7,11 @@ interface Props {
   data: SemesterBlockProps;
   subjectType?: SubjectTypeProps[];
   id: number;
-  semesters?: SemesterProps[];
 }
 
-export default async function SemesterBlock({
-  data,
-  subjectType,
-  id,
-  semesters,
-}: Props) {
+export default async function SemesterBlock({ data, subjectType, id }: Props) {
   const t = await getTranslations("Common");
-  const semestersData = semesters ? semesters : [];
+  const semestersData = data.semesters ? data.semesters : [];
   return (
     <div>
       <div className="relative mb-12">
@@ -32,49 +26,53 @@ export default async function SemesterBlock({
       </div>
 
       <div className="flex flex-col gap-6">
-        {semestersData.map((semester) => (
-          <div key={semester.id} className="flex gap-3 items-start">
-            <h3 className="text-xl text-center uppercase font-bold semester-name text-blue-900 sticky top-16">
-              {semester.name}
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 w-full">
-              {semester.subjects.map((subject) => (
-                <div key={subject.id} className="space-y-3 cursor-pointer">
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <div
-                        className="bg-white rounded-lg shadow border border-border border-l-4 p-4 hover:shadow-md transition-shadow"
-                        style={{ borderLeftColor: subject.subjectType.color }}
-                      >
-                        <Badge
-                          className="text-xs mb-4"
-                          variant="outline"
+        {semestersData
+          .sort((a, b) => a.semester - b.semester)
+          .map((semester) => (
+            <div key={semester.id} className="flex gap-3 items-start">
+              <h3 className="text-xl text-center uppercase font-bold semester-name text-blue-900 sticky top-16">
+                {t("semester")} {semester.semester}
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 w-full">
+                {semester.subjects.map((subject) => (
+                  <div key={subject.id} className="space-y-3 cursor-pointer">
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <div
+                          className="bg-white rounded-lg shadow border border-border border-l-4 p-4 hover:shadow-md transition-shadow"
                           style={{
-                            backgroundColor: `${subject.subjectType.color}10`,
-                            color: subject.subjectType.color,
-                            borderColor: subject.subjectType.color,
+                            borderLeftColor: subject.subjectType.color,
                           }}
                         >
-                          {subject.credits} {t("credits")}
-                        </Badge>
+                          <Badge
+                            className="text-xs mb-4"
+                            variant="outline"
+                            style={{
+                              backgroundColor: `${subject.subjectType.color}10`,
+                              color: subject.subjectType.color,
+                              borderColor: subject.subjectType.color,
+                            }}
+                          >
+                            {subject.credits} {t("credits")}
+                          </Badge>
 
-                        <h3
-                          className="font-semibold leading-tight"
-                          style={{ color: subject.subjectType.color }}
-                        >
-                          {subject.name}
-                        </h3>
-                      </div>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p>{subject.subjectType.type}</p>
-                    </TooltipContent>
-                  </Tooltip>
-                </div>
-              ))}
+                          <h3
+                            className="font-semibold leading-tight"
+                            style={{ color: subject.subjectType.color }}
+                          >
+                            {subject.name}
+                          </h3>
+                        </div>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>{subject.subjectType.type}</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
 
       <div className="md:sticky bottom-0 mt-8 bg-white/95 border-t border-gray-200 p-4">
