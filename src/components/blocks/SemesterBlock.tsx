@@ -1,4 +1,4 @@
-import { SemesterBlockProps, SubjectTypeProps } from "@/global";
+import { SemesterBlockProps, SemesterProps, SubjectTypeProps } from "@/global";
 import { getTranslations } from "next-intl/server";
 import { Badge } from "../ui/badge";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
@@ -7,10 +7,17 @@ interface Props {
   data: SemesterBlockProps;
   subjectType?: SubjectTypeProps[];
   id: number;
+  semesters?: SemesterProps[];
 }
 
-export default async function SemesterBlock({ data, subjectType, id }: Props) {
+export default async function SemesterBlock({
+  data,
+  subjectType,
+  id,
+  semesters,
+}: Props) {
   const t = await getTranslations("Common");
+  const semestersData = semesters ? semesters : [];
   return (
     <div>
       <div className="relative mb-12">
@@ -25,7 +32,7 @@ export default async function SemesterBlock({ data, subjectType, id }: Props) {
       </div>
 
       <div className="flex flex-col gap-6">
-        {data.semesters.map((semester) => (
+        {semestersData.map((semester) => (
           <div key={semester.id} className="flex gap-3 items-start">
             <h3 className="text-xl text-center uppercase font-bold semester-name text-blue-900 sticky top-16">
               {semester.name}

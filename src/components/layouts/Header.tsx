@@ -61,7 +61,13 @@ export default function Header({
         return (
           <Button key={item.text} variant="ghost" asChild size="sm">
             <Link
-              href={`/${item.slug === "home" ? "" : item.slug}`}
+              href={`/${
+                item.slug === "home"
+                  ? ""
+                  : item.navigation?.slug === "educational-program"
+                  ? `/educational-program/${item.slug}`
+                  : item.slug
+              }`}
               className="cursor-pointer"
               locale={locale}
             >
@@ -91,7 +97,13 @@ export default function Header({
         return (
           <MenubarItem key={item.text} asChild>
             <Link
-              href={`/${item.slug === "home" ? "" : item.slug}`}
+              href={`/${
+                item.slug === "home"
+                  ? ""
+                  : item.navigation?.slug === "educational-program"
+                  ? `/educational-program/${item.slug}`
+                  : item.slug
+              }`}
               className="cursor-pointer"
               locale={locale}
             >

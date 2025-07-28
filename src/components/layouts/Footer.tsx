@@ -128,7 +128,11 @@ export default async function Footer(data: FooterProps & { locale: Locale }) {
                   {quickLink.navigations.map((navigation) => (
                     <li key={navigation.slug}>
                       <Link
-                        href={`/${navigation.slug}`}
+                        href={
+                          navigation.slug === "educational-program"
+                            ? `/educational-program/${navigation.navigations[0].slug}`
+                            : `/${navigation.slug}`
+                        }
                         locale={data.locale}
                         className="text-white"
                       >

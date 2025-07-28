@@ -11,10 +11,20 @@ export const getGlobalSetiings = async (locale: Locale) => {
           populate: {
             navigations: {
               populate: {
+                navigation: {
+                  fields: ["slug"],
+                },
                 navigations: {
                   populate: {
+                    navigation: {
+                      fields: ["slug"],
+                    },
                     navigations: {
-                      populate: "*",
+                      populate: {
+                        navigation: {
+                          fields: ["slug"],
+                        },
+                      },
                     },
                   },
                 },
@@ -52,6 +62,11 @@ export const getGlobalSetiings = async (locale: Locale) => {
               populate: {
                 navigations: {
                   fields: ["text", "slug", "pageType", "singlePageContent"],
+                  populate: {
+                    navigations: {
+                      fields: ["text", "slug", "pageType", "singlePageContent"],
+                    },
+                  },
                 },
               },
             },
@@ -182,6 +197,11 @@ export const getAllNavigation = async (locale: Locale) => {
       params: {
         locale,
         fields: ["slug"],
+        populate: {
+          navigation: {
+            fields: ["slug"],
+          },
+        },
         pagination: {
           pageSize: 1000,
         },
@@ -517,6 +537,38 @@ export const getEducationalProgram = async (locale: Locale) => {
       params: {
         locale,
         populate: {
+          insertToPage: {
+            fields: ["slug"],
+          },
+        },
+      },
+      next: {
+        tags: ["educational-program", "subject-type", "semester", "subject"],
+      },
+    });
+
+    return data.data;
+  } catch (error) {
+    return null;
+  }
+};
+
+export const getDetailEducationalProgram = async (
+  locale: Locale,
+  slugEP: string
+) => {
+  try {
+    const data = await api.get(API_ROUTES.EDUCATIONAL_PROGRAM, {
+      params: {
+        locale,
+        filters: {
+          insertToPage: {
+            slug: {
+              $eq: slugEP,
+            },
+          },
+        },
+        populate: {
           thumbnail: {
             fields: ["url", "alternativeText", "width", "height"],
           },
@@ -526,21 +578,26 @@ export const getEducationalProgram = async (locale: Locale) => {
                 populate: {
                   semesters: {
                     fields: ["name"],
-                    populate: {
-                      subjects: {
-                        fields: ["name", "credits"],
-                        populate: {
-                          subjectType: {
-                            fields: ["type", "color"],
-                          },
-                        },
-                      },
-                    },
                   },
                 },
               },
               "elements.block-description": {
                 populate: "*",
+              },
+            },
+          },
+          insertToPage: {
+            fields: ["text", "slug"],
+          },
+          semesters: {
+            populate: {
+              subjects: {
+                fields: ["name", "credits"],
+                populate: {
+                  subjectType: {
+                    fields: ["type", "color"],
+                  },
+                },
               },
             },
           },

@@ -96,6 +96,10 @@ export default async function NewsPage({
 
   const article = data.data[0];
 
+  if (!article) {
+    return notFound();
+  }
+
   const isHeading = checkIsHeading(article.content);
 
   return (
@@ -156,7 +160,7 @@ export default async function NewsPage({
                     <User className="w-4 h-4" />
                     {t("author")}:
                     <Link
-                      href={`/staff/${article.author.username}`}
+                      href={`/lecturer/${article.author.username}`}
                       className="text-blue-900 hover:text-blue-950 transition-colors"
                     >
                       {article.author.displayName}

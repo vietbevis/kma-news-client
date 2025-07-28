@@ -41,10 +41,10 @@ export async function generateMetadata({
     title: staffData.displayName,
     description: staffData.position,
     alternates: {
-      canonical: `${envConfig.NEXT_PUBLIC_APP_URL}/${locale}/staff/${username}`,
+      canonical: `${envConfig.NEXT_PUBLIC_APP_URL}/${locale}/lecturer/${username}`,
       languages: {
-        "vi-VN": `${envConfig.NEXT_PUBLIC_APP_URL}/vi/staff/${username}`,
-        "en-US": `${envConfig.NEXT_PUBLIC_APP_URL}/en/staff/${username}`,
+        "vi-VN": `${envConfig.NEXT_PUBLIC_APP_URL}/vi/lecturer/${username}`,
+        "en-US": `${envConfig.NEXT_PUBLIC_APP_URL}/en/lecturer/${username}`,
       },
     },
     openGraph: {
@@ -90,13 +90,17 @@ export default async function StaffPage({
 
   const staff = data.data[0] as StaffProps;
 
+  if (!staff) {
+    return notFound();
+  }
+
   return (
     <Container className="py-4 pb-20">
       <Breadcrumb className="mb-4">
         <BreadcrumbList className="flex-nowrap">
           <BreadcrumbItem className="text-nowrap whitespace-nowrap inline-block">
             <BreadcrumbLink asChild>
-              <Link href={`/staff`}>{t("staff")}</Link>
+              <Link href={`/lecturer`}>{t("staff")}</Link>
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />

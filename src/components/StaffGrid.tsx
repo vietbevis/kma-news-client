@@ -22,7 +22,7 @@ export default async function StaffGrid({
             <Image image={item.avatar} className="w-full h-full object-cover" />
           </div>
           <Link
-            href={`/staff/${item.username}`}
+            href={`/lecturer/${item.username}`}
             className="text-lg font-bold hover:text-blue-900 transition-colors"
           >
             {item.displayName}

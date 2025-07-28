@@ -10,7 +10,12 @@ import {
 } from "@/components/ui/breadcrumb";
 import Image from "@/components/ui/image";
 import { Separator } from "@/components/ui/separator";
-import { getEducationalProgram, getSubjectType } from "@/data/loader";
+import envConfig from "@/config/env-config";
+import {
+  getDetailEducationalProgram,
+  getEducationalProgram,
+  getSubjectType,
+} from "@/data/loader";
 import { Link } from "@/i18n/navigation";
 import { Metadata } from "next";
 import { Locale } from "next-intl";
@@ -21,38 +26,86 @@ import Sidebar from "./Sidebar";
 export const generateMetadata = async ({
   params,
 }: {
-  params: Promise<{ locale: Locale }>;
+  params: Promise<{ locale: Locale; slugEP: string }>;
 }): Promise<Metadata> => {
-  const { locale } = await params;
-  const data = await getEducationalProgram(locale);
+  const { locale, slugEP } = await params;
+  const data = await getDetailEducationalProgram(locale, slugEP);
 
-  const pageData = data.data;
+  const pageData = data.data[0];
 
   return {
-    title: pageData.title,
+    title: pageData.name,
     description: pageData.description,
+    alternates: {
+      canonical: `${envConfig.NEXT_PUBLIC_APP_URL}/${locale}/educational-program/${slugEP}`,
+      languages: {
+        "vi-VN": `${envConfig.NEXT_PUBLIC_APP_URL}/vi/educational-program/${slugEP}`,
+        "en-US": `${envConfig.NEXT_PUBLIC_APP_URL}/en/educational-program/${slugEP}`,
+      },
+    },
+    openGraph: {
+      title: pageData.name,
+      description: pageData.description,
+      images: [
+        {
+          url: pageData.thumbnail.url,
+          width: pageData.thumbnail.width,
+          height: pageData.thumbnail.height,
+          alt: pageData.thumbnail.alternativeText,
+        },
+      ],
+    },
+    twitter: {
+      title: pageData.name,
+      description: pageData.description,
+      images: [
+        {
+          url: pageData.thumbnail.url,
+          width: pageData.thumbnail.width,
+          height: pageData.thumbnail.height,
+          alt: pageData.thumbnail.alternativeText,
+        },
+      ],
+    },
   };
+};
+
+export const generateStaticParams = async ({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>;
+}) => {
+  const { locale } = await params;
+  const data = await getEducationalProgram(locale);
+  return data.data.map((item: any) => ({
+    slugEP: item.insertToPage.slug,
+  }));
 };
 
 export default async function EducationalProgram({
   params,
 }: {
-  params: Promise<{ locale: Locale }>;
+  params: Promise<{ locale: Locale; slugEP: string }>;
 }) {
-  const { locale } = await params;
+  const { locale, slugEP } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("Common");
 
-  const data = await getEducationalProgram(locale);
+  const data = await getDetailEducationalProgram(locale, slugEP);
   const dataSubjectType = await getSubjectType(locale);
 
   if (!data) {
     notFound();
   }
 
-  const pageData = data.data;
-  const subjectTypeData = dataSubjectType.data;
-  const headings = pageData.blocks.map((block: any) => block.title);
+  const pageData = data.data[0];
+
+  if (!pageData) {
+    notFound();
+  }
+
+  const subjectTypeData = dataSubjectType ? dataSubjectType.data : [];
+  const headings = pageData.blocks.map((block: any) => block.title) || [];
 
   return (
     <div className="scroll-pt-10">
@@ -77,13 +130,13 @@ export default async function EducationalProgram({
               <BreadcrumbSeparator className="text-white/80" />
               <BreadcrumbItem>
                 <BreadcrumbPage className="line-clamp-1 text-white">
-                  {pageData.title}
+                  {pageData.name}
                 </BreadcrumbPage>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
           <h1 className="xl:text-5xl lg:text-4xl md:text-3xl text-2xl font-bold text-white text-center">
-            {pageData.title}
+            {pageData.name}
           </h1>
         </Container>
       </div>
@@ -132,6 +185,7 @@ export default async function EducationalProgram({
             <BlockRenderer
               blocks={pageData.blocks}
               subjectType={subjectTypeData}
+              semesters={pageData.semesters}
             />
           </div>
         </div>

@@ -74,6 +74,7 @@ export interface NavigationProps {
   text: string;
   slug: string;
   navigations: NavigationProps[];
+  navigation: NavigationProps | null;
 }
 
 export interface SemesterProps {
@@ -121,7 +122,6 @@ export interface ArticleItemProps {
   title: string;
   shortDescription: string;
   slug: string;
-  isFeature: boolean;
   thumbnail: ImageProps;
   tag: TagProps;
   content: string;

@@ -95,6 +95,10 @@ export default async function EventPage({
 
   const eventData = data.data[0] as EventProps;
 
+  if (!eventData) {
+    return notFound();
+  }
+
   return (
     <Container className="py-4">
       <div className="grid grid-cols-12 gap-6">
