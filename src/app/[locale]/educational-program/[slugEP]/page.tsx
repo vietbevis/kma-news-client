@@ -99,7 +99,6 @@ export default async function EducationalProgram({
   }
 
   const pageData = data.data[0];
-  console.log("🚀 ~ EducationalProgram ~ pageData:", pageData);
 
   if (!pageData) {
     notFound();
