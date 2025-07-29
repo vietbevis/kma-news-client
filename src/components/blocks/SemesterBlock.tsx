@@ -34,42 +34,52 @@ export default async function SemesterBlock({ data, subjectType, id }: Props) {
                 {t("semester")} {semester.semester}
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 w-full">
-                {semester.subjects.map((subject) => (
-                  <div key={subject.id} className="space-y-3 cursor-pointer">
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <div
-                          className="bg-white rounded-lg shadow border border-border border-l-4 p-4 hover:shadow-md transition-shadow"
-                          style={{
-                            borderLeftColor: subject.subjectType.color,
-                          }}
-                        >
-                          <Badge
-                            className="text-xs mb-4"
-                            variant="outline"
+                {semester.subjects.map((subject, index) => {
+                  const subjectType: SubjectTypeProps = subject.subjectType
+                    ? subject.subjectType
+                    : {
+                        id: index,
+                        type: "Chung",
+                        color: "#1c398e",
+                        documentId: String(index),
+                      };
+                  return (
+                    <div key={subject.id} className="space-y-3 cursor-pointer">
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <div
+                            className="bg-white rounded-lg shadow border border-border border-l-4 p-4 hover:shadow-md transition-shadow"
                             style={{
-                              backgroundColor: `${subject.subjectType.color}10`,
-                              color: subject.subjectType.color,
-                              borderColor: subject.subjectType.color,
+                              borderLeftColor: subjectType.color,
                             }}
                           >
-                            {subject.credits} {t("credits")}
-                          </Badge>
+                            <Badge
+                              className="text-xs mb-4"
+                              variant="outline"
+                              style={{
+                                backgroundColor: `${subjectType.color}10`,
+                                color: subjectType.color,
+                                borderColor: subjectType.color,
+                              }}
+                            >
+                              {subject.credits} {t("credits")}
+                            </Badge>
 
-                          <h3
-                            className="font-semibold leading-tight"
-                            style={{ color: subject.subjectType.color }}
-                          >
-                            {subject.name}
-                          </h3>
-                        </div>
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <p>{subject.subjectType.type}</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </div>
-                ))}
+                            <h3
+                              className="font-semibold leading-tight"
+                              style={{ color: subjectType.color }}
+                            >
+                              {subject.name}
+                            </h3>
+                          </div>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>{subjectType.type}</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           ))}
