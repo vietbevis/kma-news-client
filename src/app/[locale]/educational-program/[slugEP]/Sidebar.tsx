@@ -49,7 +49,7 @@ export default function Sidebar({ headings }: { headings: string[] }) {
             key={index}
             href={`#heading-${index}`}
             className={`
-              text-left text-sm py-3 px-4 border-l-4 transition-all duration-200 hover:bg-gray-50 focus:outline-none focus:bg-gray-50
+              text-left text-sm py-3 px-4 uppercase border-l-4 transition-all duration-200 hover:bg-gray-50 focus:outline-none focus:bg-gray-50
               ${
                 activeSection === index
                   ? "text-blue-900 font-semibold border-l-blue-900 bg-blue-50"

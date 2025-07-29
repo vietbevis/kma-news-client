@@ -7,7 +7,7 @@ export default function BlockDescription(
     <div className="mb-12">
       <div className="relative mb-6">
         <h3
-          className="text-3xl uppercase font-bold text-blue-900"
+          className="text-2xl md:text-3xl uppercase font-bold text-blue-900"
           id={`heading-${data.id}`}
           data-index={data.id}
         >

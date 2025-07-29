@@ -13,10 +13,10 @@ export default async function SemesterBlock({ data, subjectType, id }: Props) {
   const t = await getTranslations("Common");
   const semestersData = data.semesters ? data.semesters : [];
   return (
-    <div>
+    <div className="mb-12">
       <div className="relative mb-12">
         <h3
-          className="text-3xl uppercase font-bold text-blue-900"
+          className="text-2xl md:text-3xl uppercase font-bold text-blue-900"
           id={`heading-${id}`}
           data-index={id}
         >
