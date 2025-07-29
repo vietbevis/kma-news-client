@@ -26,7 +26,13 @@ export default function SidebarNavigation(data: NavigationItemProps) {
                 className="w-full"
               >
                 <Link
-                  href={item.slug}
+                  href={`/${
+                    item.slug === "home"
+                      ? ""
+                      : item.slug === "educational-program"
+                      ? `/educational-program/${item.navigations[0].slug}`
+                      : item.slug
+                  }`}
                   className={cn(
                     isActive
                       ? "text-blue-900 hover:text-blue-900 bg-accent"

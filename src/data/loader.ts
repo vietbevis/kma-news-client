@@ -172,6 +172,11 @@ export const getNavigationBySlug = async (locale: Locale, pageSlug: string) => {
             populate: {
               navigations: {
                 fields: ["text", "slug", "pageType", "singlePageContent"],
+                populate: {
+                  navigations: {
+                    fields: ["slug"],
+                  },
+                },
               },
             },
           },

@@ -143,7 +143,13 @@ export default function Header({
               asChild
             >
               <Link
-                href={`/${item.slug === "home" ? "" : item.slug}`}
+                href={`/${
+                  item.slug === "home"
+                    ? ""
+                    : item.navigation?.slug === "educational-program"
+                    ? `/educational-program/${item.slug}`
+                    : item.slug
+                }`}
                 locale={locale}
               >
                 {item.text}
