@@ -66,7 +66,7 @@ export default async function SemesterBlock({ data, subjectType, id }: Props) {
                             </Badge>
 
                             <h3
-                              className="font-semibold leading-tight"
+                              className="font-semibold leading-tight whitespace-pre-wrap"
                               style={{ color: subjectType.color }}
                             >
                               {subject.name}
