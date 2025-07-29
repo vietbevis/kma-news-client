@@ -80,7 +80,7 @@ export default function Header({
       // Case 2: Has children - render as dropdown menu
       return (
         <MenubarMenu key={item.text}>
-          <MenubarTrigger className="cursor-pointer h-8 px-3">
+          <MenubarTrigger className="cursor-pointer h-8 px-3 hover:bg-accent hover:text-accent-foreground">
             {item.text}
           </MenubarTrigger>
           <MenubarContent>{renderMenuItems(item.navigations)}</MenubarContent>
@@ -104,7 +104,7 @@ export default function Header({
                   ? `/educational-program/${item.slug}`
                   : item.slug
               }`}
-              className="cursor-pointer"
+              className="cursor-pointer hover:bg-accent hover:text-accent-foreground"
               locale={locale}
             >
               {item.text}
@@ -116,7 +116,7 @@ export default function Header({
       // Has children - render as submenu
       return (
         <MenubarSub key={item.text}>
-          <MenubarSubTrigger className="cursor-pointer">
+          <MenubarSubTrigger className="cursor-pointer hover:bg-accent hover:text-accent-foreground">
             {item.text}
           </MenubarSubTrigger>
           <MenubarSubContent>
