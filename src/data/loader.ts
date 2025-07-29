@@ -399,6 +399,9 @@ export const getListStaff = async (locale: Locale) => {
       params: {
         locale,
         fields: ["username", "displayName"],
+        sort: {
+          order: "asc",
+        },
         populate: {
           avatar: {
             fields: ["url", "alternativeText", "width", "height"],
