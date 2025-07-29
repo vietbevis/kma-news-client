@@ -33,7 +33,7 @@ export default async function SemesterBlock({ data, subjectType, id }: Props) {
               <h3 className="text-xl text-center uppercase font-bold semester-name text-blue-900 sticky top-16">
                 {t("semester")} {semester.semester}
               </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 w-full">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 w-full items-stretch">
                 {semester.subjects.map((subject, index) => {
                   const subjectType: SubjectTypeProps = subject.subjectType
                     ? subject.subjectType
@@ -44,15 +44,15 @@ export default async function SemesterBlock({ data, subjectType, id }: Props) {
                         documentId: String(index),
                       };
                   return (
-                    <div key={subject.id} className="space-y-3 cursor-pointer">
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <div
-                            className="bg-white rounded-lg shadow border border-border border-l-4 p-4 hover:shadow-md transition-shadow"
-                            style={{
-                              borderLeftColor: subjectType.color,
-                            }}
-                          >
+                    <Tooltip key={subject.id}>
+                      <TooltipTrigger asChild>
+                        <div
+                          className="space-y-3 cursor-pointer bg-white rounded-lg shadow border border-border border-l-4 p-4 hover:shadow-md transition-shadow"
+                          style={{
+                            borderLeftColor: subjectType.color,
+                          }}
+                        >
+                          <div>
                             <Badge
                               className="text-xs mb-4"
                               variant="outline"
@@ -72,12 +72,12 @@ export default async function SemesterBlock({ data, subjectType, id }: Props) {
                               {subject.name}
                             </h3>
                           </div>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p>{subjectType.type}</p>
-                        </TooltipContent>
-                      </Tooltip>
-                    </div>
+                        </div>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>{subjectType.type}</p>
+                      </TooltipContent>
+                    </Tooltip>
                   );
                 })}
               </div>
