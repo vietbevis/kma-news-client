@@ -194,6 +194,14 @@ a.toc-link:hover {
   @apply my-3;
 }
 
+.prose img {
+  margin: 0 auto;
+}
+
+.prose figcaption {
+  @apply text-center text-sm text-blue-900/80 italic;
+}
+
 .semester-name {
   writing-mode: vertical-lr;
   transform: rotate(180deg);
