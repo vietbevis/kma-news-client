@@ -1,13 +1,5 @@
 import { BlockRenderer } from "@/components/BlockRenderer";
 import Container from "@/components/Container";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
 import Image from "@/components/ui/image";
 import { Separator } from "@/components/ui/separator";
 import envConfig from "@/config/env-config";
@@ -16,7 +8,6 @@ import {
   getEducationalProgram,
   getSubjectType,
 } from "@/data/loader";
-import { Link } from "@/i18n/navigation";
 import { Metadata } from "next";
 import { Locale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
@@ -118,7 +109,7 @@ export default async function EducationalProgram({
           <div className="absolute inset-0 bg-black/60" />
         </div>
         <Container className="relative z-10 py-12 flex flex-col items-center justify-center gap-3">
-          <Breadcrumb>
+          {/* <Breadcrumb>
             <BreadcrumbList className="flex-nowrap">
               <BreadcrumbItem className="text-nowrap whitespace-nowrap inline-block">
                 <BreadcrumbLink asChild>
@@ -134,8 +125,8 @@ export default async function EducationalProgram({
                 </BreadcrumbPage>
               </BreadcrumbItem>
             </BreadcrumbList>
-          </Breadcrumb>
-          <h1 className="xl:text-5xl lg:text-4xl md:text-3xl text-2xl font-bold text-white text-center">
+          </Breadcrumb> */}
+          <h1 className="xl:text-6xl lg:text-5xl md:text-4xl text-3xl font-bold text-white text-center">
             {pageData.name}
           </h1>
         </Container>
