@@ -20,7 +20,7 @@ export default async function CardArticle(article: ArticlesProps) {
       <div className="aspect-video relative overflow-hidden">
         <Image
           image={article.thumbnail}
-          className="object-cover transition-transform hover:scale-105"
+          className="object-cover w-full h-full transition-transform hover:scale-105"
         />
       </div>
       <div className="space-y-4 pb-3 px-4">
