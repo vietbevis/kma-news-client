@@ -66,7 +66,7 @@ export interface EventProps {
   speakers: string;
   thumbnail: ImageProps;
   tag: TagProps;
-  insertToPage: Omit<NavigationProps, "navigations">;
+  insertToPage: Omit<NavigationProps, "navigations">[];
   relatedEvents: EventProps[];
 }
 

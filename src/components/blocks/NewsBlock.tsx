@@ -15,6 +15,10 @@ import {
 export default async function NewsBlock(data: NewsBlockProps) {
   const displayArticles = data?.articles || [];
 
+  if (displayArticles.length === 0) {
+    return null;
+  }
+
   return (
     <section
       className={`pt-12 group ${

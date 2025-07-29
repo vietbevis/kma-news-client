@@ -103,13 +103,13 @@ export default async function EventPage({
     <Container className="py-4">
       <div className="grid grid-cols-12 gap-6">
         <div className="lg:col-span-8 xl:col-span-9 col-span-12">
-          {eventData.insertToPage && (
+          {eventData.insertToPage && eventData.insertToPage.length > 0 && (
             <Breadcrumb className="mb-4">
               <BreadcrumbList className="flex-nowrap">
                 <BreadcrumbItem className="text-nowrap whitespace-nowrap inline-block">
                   <BreadcrumbLink asChild>
-                    <Link href={`/${eventData.insertToPage.slug}`}>
-                      {eventData.insertToPage.text}
+                    <Link href={`/${eventData.insertToPage[0]?.slug}`}>
+                      {eventData.insertToPage[0]?.text}
                     </Link>
                   </BreadcrumbLink>
                 </BreadcrumbItem>

@@ -38,6 +38,10 @@ export default function SliderBlock(data: SliderBlockProps) {
     });
   }, [api]);
 
+  if (data.articles.length === 0 && data.events.length === 0) {
+    return null;
+  }
+
   return (
     <section
       className={`relative pb-8 group ${

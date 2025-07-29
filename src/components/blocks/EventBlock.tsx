@@ -15,6 +15,11 @@ import Image from "../ui/image";
 
 export default function EventBlock(data: EventBlockProps) {
   const displayEvents = data?.events || [];
+
+  if (displayEvents.length === 0) {
+    return null;
+  }
+
   return (
     <section
       className={`overflow-hidden group ${

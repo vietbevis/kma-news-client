@@ -106,13 +106,13 @@ export default async function NewsPage({
     <Container className="py-4">
       <div className="grid grid-cols-12 gap-6">
         <div className="lg:col-span-8 xl:col-span-9 col-span-12">
-          {article.insertToPage && (
+          {article.insertToPage && article.insertToPage.length > 0 && (
             <Breadcrumb className="mb-3">
               <BreadcrumbList className="flex-nowrap">
                 <BreadcrumbItem className="text-nowrap whitespace-nowrap inline-block">
                   <BreadcrumbLink asChild>
-                    <Link href={`/${article.insertToPage.slug}`}>
-                      {article.insertToPage.text}
+                    <Link href={`/${article.insertToPage[0]?.slug}`}>
+                      {article.insertToPage[0]?.text}
                     </Link>
                   </BreadcrumbLink>
                 </BreadcrumbItem>

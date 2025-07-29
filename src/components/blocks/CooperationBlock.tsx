@@ -14,6 +14,11 @@ import {
 
 export default async function CooperationBlock(data: CooperationBlockProps) {
   const displayArticles = data?.articles || [];
+
+  if (displayArticles.length === 0) {
+    return null;
+  }
+
   return (
     <section
       className={`py-20 group ${
