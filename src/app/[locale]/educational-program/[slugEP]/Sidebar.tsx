@@ -39,7 +39,7 @@ export default function Sidebar({ headings }: { headings: string[] }) {
   }, [headings]);
 
   return (
-    <div className="md:sticky top-16 mb-8 col-span-1">
+    <div className="lg:sticky top-16 mb-8 col-span-1">
       <h3 className="font-semibold text-blue-900 text-xl uppercase tracking-wide mb-4">
         {t("content")}
       </h3>
