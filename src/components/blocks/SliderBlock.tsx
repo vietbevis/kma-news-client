@@ -38,7 +38,7 @@ export default function SliderBlock(data: SliderBlockProps) {
     });
   }, [api]);
 
-  if (data.articles.length === 0 && data.events.length === 0) {
+  if (data.articles.length === 0) {
     return null;
   }
 
@@ -63,7 +63,7 @@ export default function SliderBlock(data: SliderBlockProps) {
         className="w-full"
       >
         <CarouselContent>
-          {[...data.articles, ...data.events].map((article, index) => (
+          {data.articles.map((article, index) => (
             <CarouselItem key={article.slug}>
               <div className="relative h-[400px] xl:h-[550px] overflow-hidden">
                 {/* Background Image */}
@@ -90,7 +90,7 @@ export default function SliderBlock(data: SliderBlockProps) {
 
                       {/* Title */}
                       <h1 className="text-2xl md:text-3xl line-clamp-3 lg:text-4xl font-bold text-white mb-4 leading-tight">
-                        {"title" in article ? article.title : article.name}
+                        {article.title}
                       </h1>
 
                       {/* Description */}

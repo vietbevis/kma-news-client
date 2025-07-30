@@ -229,11 +229,14 @@ export type Block =
 
 export interface CommonBlock<T extends BlockVariant>
   extends Base<"blocks.common-block"> {
-  variants: T;
+  variants: BlockVariant;
   title: string;
   summary: string | null;
   link: LinkProps;
   isBackgroundHighlight: boolean;
+  backgroundImage: ImageProps;
+  isLinkFullWidth: boolean;
+  articles: ArticlesProps[];
 }
 
 export interface SemesterBlockProps extends Base<"blocks.semester-block"> {
@@ -248,13 +251,12 @@ export interface BlockDescriptionProps
 }
 export interface SliderBlockProps extends CommonBlock<"slider"> {
   articles: ArticlesProps[];
-  events: EventProps[];
 }
 export interface NewsBlockProps extends CommonBlock<"news"> {
   articles: ArticlesProps[];
 }
 export interface EventBlockProps extends CommonBlock<"events"> {
-  events: EventProps[];
+  articles: ArticlesProps[];
   backgroundImage: ImageProps;
 }
 export interface TrainingBlockProps extends CommonBlock<"trainning"> {

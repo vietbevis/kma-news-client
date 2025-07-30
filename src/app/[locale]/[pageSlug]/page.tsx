@@ -1,14 +1,10 @@
 import ArticleGrid from "@/components/ArticleGrid";
 import Container from "@/components/Container";
-import EventsGrid from "@/components/EventsGrid";
 import SidebarNavigation from "@/components/SidebarNavigation";
-import StaffGrid from "@/components/StaffGrid";
 import envConfig from "@/config/env-config";
 import {
   getAllNavigation,
   getListArticleByNavigationId,
-  getListEventByNavigationId,
-  getListStaff,
   getNavigationBySlug,
 } from "@/data/loader";
 import { NavigationItemProps } from "@/global";
@@ -30,7 +26,8 @@ export const generateStaticParams = async ({
       (item: any) =>
         item.slug !== "home" &&
         item.slug !== "educational-program" &&
-        item.navigation?.slug !== "educational-program"
+        item.navigation?.slug !== "educational-program" &&
+        item.slug !== "lecturer"
     )
     .map((item: any) => ({
       pageSlug: item.slug,
@@ -115,11 +112,7 @@ export default async function Page({
     });
   }
 
-  const [listArticle, listEvent, listStaff] = await Promise.all([
-    getListArticleByNavigationId(locale, navigation.id),
-    getListEventByNavigationId(locale, navigation.id),
-    getListStaff(locale),
-  ]);
+  const listArticle = await getListArticleByNavigationId(locale, navigation.id);
 
   return (
     <Container className="py-4">
@@ -131,9 +124,6 @@ export default async function Page({
           {navigation.pageType === "news" && listArticle && (
             <ArticleGrid listArticle={listArticle.data} />
           )}
-          {navigation.pageType === "events" && listEvent && (
-            <EventsGrid listEvent={listEvent.data} />
-          )}
           {navigation.pageType === "single" && (
             <div
               className="prose max-w-none"
@@ -141,9 +131,6 @@ export default async function Page({
                 __html: navigation.singlePageContent,
               }}
             />
-          )}
-          {navigation.pageType === "staff" && listStaff && (
-            <StaffGrid listStaff={listStaff.data} />
           )}
         </div>
       </div>

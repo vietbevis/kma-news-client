@@ -1,12 +1,8 @@
 import { Block, SubjectTypeProps } from "@/global";
-import AlumniBlock from "./blocks/AlumniBlock";
 import BlockDescription from "./blocks/BlockDescription";
-import CooperationBlock from "./blocks/CooperationBlock";
-import EventBlock from "./blocks/EventBlock";
-import NewsBlock from "./blocks/NewsBlock";
+import CommonBlock from "./blocks/CommonBlock";
 import SemesterBlock from "./blocks/SemesterBlock";
 import SliderBlock from "./blocks/SliderBlock";
-import TrainingBlock from "./blocks/TrainingBlock";
 
 function renderBlock(
   block: Block,
@@ -16,20 +12,20 @@ function renderBlock(
   switch (block.__component) {
     case "blocks.common-block":
       switch (block.variants) {
-        case "news":
-          return <NewsBlock {...block} key={index} />;
+        // case "news":
+        //   return <NewsBlock {...block} key={index} />;
         case "slider":
           return <SliderBlock {...block} key={index} />;
-        case "events":
-          return <EventBlock {...block} key={index} />;
-        case "trainning":
-          return <TrainingBlock {...block} key={index} />;
-        case "cooperation":
-          return <CooperationBlock {...block} key={index} />;
-        case "alumni":
-          return <AlumniBlock {...block} key={index} />;
+        // case "events":
+        //   return <EventBlock {...block} key={index} />;
+        // case "trainning":
+        //   return <TrainingBlock {...block} key={index} />;
+        // case "cooperation":
+        //   return <CooperationBlock {...block} key={index} />;
+        // case "alumni":
+        //   return <AlumniBlock {...block} key={index} />;
         default:
-          return null;
+          return <CommonBlock {...block} key={index} />;
       }
     case "blocks.semester-block":
       return (

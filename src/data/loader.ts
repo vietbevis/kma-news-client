@@ -117,27 +117,6 @@ export const getHomePage = async (locale: Locale) => {
                     },
                   },
                 },
-                events: {
-                  fields: [
-                    "name",
-                    "shortDescription",
-                    "description",
-                    "slug",
-                    "startDate",
-                    "endDate",
-                    "location",
-                    "organizer",
-                    "speakers",
-                  ],
-                  populate: {
-                    thumbnail: {
-                      fields: ["url", "alternativeText", "width", "height"],
-                    },
-                    tag: {
-                      fields: ["text", "color", "slug"],
-                    },
-                  },
-                },
                 link: true,
                 backgroundImage: {
                   fields: ["url", "alternativeText", "width", "height"],
