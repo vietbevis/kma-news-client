@@ -218,6 +218,9 @@ export const getListArticleByNavigationId = async (
             },
           },
         },
+        sort: {
+          publishedAt: "desc",
+        },
         fields: [
           "title",
           "shortDescription",

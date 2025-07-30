@@ -17,7 +17,7 @@ import { getDetailArticleBySlug, getListArticle } from "@/data/loader";
 import { ArticlesProps } from "@/global";
 import { Link } from "@/i18n/navigation";
 import { checkIsHeading, formatDate, processHeadings } from "@/lib/utils";
-import { Calendar, Clock, User } from "lucide-react";
+import { Clock, User } from "lucide-react";
 import { Metadata } from "next";
 import { Locale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
@@ -170,15 +170,9 @@ export default async function NewsPage({
               </div>
               <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
                 <div className="flex items-center gap-2">
-                  <Calendar className="w-4 h-4" />
-                  <span>
-                    {t("publishedAt")}: {formatDate(article.publishedAt)}
-                  </span>
-                </div>
-                <div className="flex items-center gap-2">
                   <Clock className="w-4 h-4" />
                   <span>
-                    {t("updatedAt")}: {formatDate(article.updatedAt)}
+                    {t("updatedAt")}: {formatDate(article.publishedAt)}
                   </span>
                 </div>
               </div>
