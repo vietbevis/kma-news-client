@@ -101,11 +101,20 @@ export default async function NewsPage({
   }
 
   const isHeading = checkIsHeading(article.content);
+  const isContentOnly =
+    !isHeading &&
+    (!article.relatedArticles || article.relatedArticles.length === 0);
 
   return (
     <Container className="py-4">
       <div className="grid grid-cols-12 gap-6">
-        <div className="lg:col-span-8 xl:col-span-9 col-span-12">
+        <div
+          className={` ${
+            isContentOnly
+              ? "xl:col-span-12 lg:col-span-12 col-span-12 max-w-7xl mx-auto"
+              : "lg:col-span-8 xl:col-span-9 col-span-12"
+          }`}
+        >
           {article.insertToPage && article.insertToPage.length > 0 && (
             <Breadcrumb className="mb-3">
               <BreadcrumbList className="flex-nowrap">
@@ -203,7 +212,11 @@ export default async function NewsPage({
             />
           </article>
         </div>
-        <div className="lg:col-span-4 xl:col-span-3 col-span-12">
+        <div
+          className={`${
+            isContentOnly ? "hidden" : "lg:col-span-4 xl:col-span-3 col-span-12"
+          }`}
+        >
           <div className="sticky top-16 flex flex-col gap-4">
             {isHeading && (
               <TableOfContents
