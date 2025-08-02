@@ -111,7 +111,7 @@ export default async function NewsPage({
         <div
           className={` ${
             isContentOnly
-              ? "xl:col-span-12 lg:col-span-12 col-span-12 max-w-7xl mx-auto"
+              ? "xl:col-start-2 lg:col-start-1 lg:col-span-12 xl:col-span-10 col-span-12"
               : "lg:col-span-8 xl:col-span-9 col-span-12"
           }`}
         >
