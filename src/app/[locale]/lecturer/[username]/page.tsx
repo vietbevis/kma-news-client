@@ -123,20 +123,32 @@ export default async function StaffPage({
             <h2 className="text-2xl font-bold uppercase text-blue-900">
               {staff.name}
             </h2>
-            <div
-              className="prose max-w-none"
-              dangerouslySetInnerHTML={{ __html: staff.position }}
-            />
-            <p>
-              <strong>Email:</strong>{" "}
-              <a href={`mailto:${staff.email}`}>{staff.email}</a>
-            </p>
-            <p>
-              <strong>Website:</strong>{" "}
-              <a href={staff.web} target="_blank" rel="noopener noreferrer">
-                {staff.web}
-              </a>
-            </p>
+            {staff.position && (
+              <div
+                className="prose max-w-none"
+                dangerouslySetInnerHTML={{ __html: staff.position }}
+              />
+            )}
+            {staff.phoneNumber && (
+              <p>
+                <strong>{t("phone")}:</strong>{" "}
+                <a href={`tel:${staff.phoneNumber}`}>{staff.phoneNumber}</a>
+              </p>
+            )}
+            {staff.email && (
+              <p>
+                <strong>Email:</strong>{" "}
+                <a href={`mailto:${staff.email}`}>{staff.email}</a>
+              </p>
+            )}
+            {staff.web && (
+              <p>
+                <strong>Website:</strong>{" "}
+                <a href={staff.web} target="_blank">
+                  {staff.web}
+                </a>
+              </p>
+            )}
           </div>
         </div>
         <div className="col-span-12 lg:col-span-8 xl:col-span-9 flex flex-col gap-8">

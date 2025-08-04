@@ -145,6 +145,7 @@ export interface StaffProps {
   name: string;
   username: string;
   dateOfBirth: string;
+  phoneNumber: string;
   email: string;
   position: string;
   createdAt: string;

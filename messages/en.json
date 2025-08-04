@@ -34,7 +34,8 @@
     "studyTime": "Study Time",
     "admissionPeriod": "Admission Time",
     "facility": "Facility",
-    "semester": "Semester"
+    "semester": "Semester",
+    "phone": "Phone"
   },
   "Footer": {
     "followUs": "Follow us:",
