@@ -8,7 +8,7 @@ const checkImageUrl = (url: string) => {
 
   return url.startsWith("http")
     ? url
-    : `${envConfig.NEXT_PUBLIC_API_ENDPOINT}${url}`;
+    : `${envConfig.NEXT_PUBLIC_IMAGE_URL}${url}`;
 };
 
 export default function Image({
