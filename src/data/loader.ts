@@ -37,6 +37,7 @@ export const getGlobalSetiings = async (locale: Locale) => {
                 },
               },
             },
+            facultyWork: true,
           },
         },
         footer: {

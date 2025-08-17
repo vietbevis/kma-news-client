@@ -40,6 +40,11 @@ interface HeaderProps {
   logo: LogoProps;
   navigations: NavigationProps[];
   locale: Locale;
+  facultyWork?: {
+    text: string;
+    href: string;
+    isExternal: boolean;
+  };
 }
 
 export default function Header({
@@ -48,6 +53,7 @@ export default function Header({
   logo,
   navigations,
   locale,
+  facultyWork,
 }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -234,10 +240,26 @@ export default function Header({
       {/* Header Bottom - Navigation */}
       <div className="bg-white border-b h-11 hidden lg:block sticky top-0 z-50 shadow">
         <div className="container mx-auto px-4">
-          <div className="flex items-center py-1.5">
+          <div className="flex items-center justify-between py-1.5">
             <Menubar className="border-none bg-transparent p-0 h-auto shadow-none">
               {renderDesktopNavigation(navigations)}
             </Menubar>
+            {facultyWork && (
+              <Button
+                variant="ghost"
+                size="sm"
+                asChild
+                className="hover:text-blue-950"
+              >
+                <Link
+                  href={facultyWork.href}
+                  target={facultyWork.isExternal ? "_blank" : "_self"}
+                  className="text-sm text-blue-900 font-medium"
+                >
+                  {facultyWork.text}
+                </Link>
+              </Button>
+            )}
           </div>
         </div>
       </div>
