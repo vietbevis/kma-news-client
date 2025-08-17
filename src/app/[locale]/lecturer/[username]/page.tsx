@@ -12,6 +12,7 @@ import envConfig from "@/config/env-config";
 import { getListStaff, getStaffByUsername } from "@/data/loader";
 import { StaffProps } from "@/global";
 import { Link } from "@/i18n/navigation";
+import { htmlToText } from "html-to-text";
 import { Metadata } from "next";
 import { Locale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
@@ -39,7 +40,9 @@ export async function generateMetadata({
   const staffData = data.data[0] as StaffProps;
   return {
     title: staffData.displayName,
-    description: staffData.position,
+    description: htmlToText(staffData.position, {
+      wordwrap: false,
+    }),
     alternates: {
       canonical: `${envConfig.NEXT_PUBLIC_APP_URL}/${locale}/lecturer/${username}`,
       languages: {
@@ -49,7 +52,9 @@ export async function generateMetadata({
     },
     openGraph: {
       title: staffData.displayName,
-      description: staffData.position,
+      description: htmlToText(staffData.position, {
+        wordwrap: false,
+      }),
       images: [
         {
           url: staffData.avatar.url,
@@ -61,7 +66,9 @@ export async function generateMetadata({
     },
     twitter: {
       title: staffData.displayName,
-      description: staffData.position,
+      description: htmlToText(staffData.position, {
+        wordwrap: false,
+      }),
       images: [
         {
           url: staffData.avatar.url,
