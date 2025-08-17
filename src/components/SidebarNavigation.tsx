@@ -30,7 +30,7 @@ export default function SidebarNavigation(data: NavigationItemProps) {
                     item.slug === "home"
                       ? ""
                       : item.slug === "educational-program"
-                      ? `/educational-program/${item.navigations[0].slug}`
+                      ? `educational-program/${item.navigations[0].slug}`
                       : item.slug
                   }`}
                   className={cn(

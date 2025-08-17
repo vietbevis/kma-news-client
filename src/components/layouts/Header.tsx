@@ -71,7 +71,7 @@ export default function Header({
                 item.slug === "home"
                   ? ""
                   : item.navigation?.slug === "educational-program"
-                  ? `/educational-program/${item.slug}`
+                  ? `educational-program/${item.slug}`
                   : item.slug
               }`}
               className="cursor-pointer"
@@ -107,7 +107,7 @@ export default function Header({
                 item.slug === "home"
                   ? ""
                   : item.navigation?.slug === "educational-program"
-                  ? `/educational-program/${item.slug}`
+                  ? `educational-program/${item.slug}`
                   : item.slug
               }`}
               className="cursor-pointer hover:bg-accent hover:text-accent-foreground"
@@ -153,7 +153,7 @@ export default function Header({
                   item.slug === "home"
                     ? ""
                     : item.navigation?.slug === "educational-program"
-                    ? `/educational-program/${item.slug}`
+                    ? `educational-program/${item.slug}`
                     : item.slug
                 }`}
                 locale={locale}
